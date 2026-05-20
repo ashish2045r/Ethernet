@@ -1,0 +1,856 @@
+# ** Note: (vsim-220) 'modelsim.ini' is used as the ini file.
+# vsim work.eth_top "+UVM_TESTNAME=eth_test" "+UVM_VERBOSITY=UVM_LOW" -l ./sim/eth_test.log -ngflow 
+# Start time: 10:26:38 on May 20,2026
+# Loading Siemens Visualizer shared object 'C:/questasim64_2025.2_1/win64/VisualizerRls/bin/libqvisualizer.dll'
+# ** Note: (vsim-8009) Loading existing optimized design _opt3
+# Loading sv_std.std
+# Loading work.eth_gmii_interface(fast)
+# Loading work.eth_ui_interface(fast)
+# Loading mtiUvm.uvm_pkg(fast)
+# Loading work.eth_top_sv_unit(fast)
+# Loading mtiUvm.questa_uvm_pkg(fast)
+# Loading work.eth_top(fast)
+# ** Warning: (vsim-3829) Non-existent associative array entry. Returning default value.
+#    Time: 0 ns  Iteration: 0  Region: /eth_top_sv_unit::eth_mon::rx_mon File: ./top/../config/statistics.sv Line: 3
+# Loading C:/questasim64_2025.2_1/uvm-1.1d\win64\uvm_dpi.dll
+# 
+# *****************************************************************
+#    Using QuickLZ compression software.
+# *****************************************************************
+# 
+# ----------------------------------------------------------------
+# UVM-1.1d
+# (C) 2007-2013 Mentor Graphics Corporation
+# (C) 2007-2013 Cadence Design Systems, Inc.
+# (C) 2006-2013 Synopsys, Inc.
+# (C) 2011-2013 Cypress Semiconductor Corp.
+# ----------------------------------------------------------------
+# 
+#   ***********       IMPORTANT RELEASE NOTES         ************
+# 
+#   You are using a version of the UVM library that has been compiled
+#   with `UVM_NO_DEPRECATED undefined.
+#   See http://www.eda.org/svdb/view.php?id=3313 for more details.
+# 
+#   You are using a version of the UVM library that has been compiled
+#   with `UVM_OBJECT_MUST_HAVE_CONSTRUCTOR undefined.
+#   See http://www.eda.org/svdb/view.php?id=3770 for more details.
+# 
+#       (Specify +UVM_NO_RELNOTES to turn off this notice)
+# 
+# UVM_INFO @ 0: reporter [RNTST] Running test eth_test...
+# UVM_INFO ./top/../config/../agents/eth_drv.sv(16) @ 0: uvm_test_top.env_h.agnt_mac[0].drv_h [eth_drv] ETH GMII INTERFACE CONNECTION_PASSED
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(24) @ 0: uvm_test_top.env_h.agnt_mac[0].mon_h [eth_mon] ETH GMII INTERFACE CONNECTION_PASSED
+# UVM_INFO ./top/../config/../agents/eth_drv.sv(16) @ 0: uvm_test_top.env_h.agnt_mac[1].drv_h [eth_drv] ETH GMII INTERFACE CONNECTION_PASSED
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(24) @ 0: uvm_test_top.env_h.agnt_mac[1].mon_h [eth_mon] ETH GMII INTERFACE CONNECTION_PASSED
+# UVM_INFO @ 0: reporter [UVMTOP] UVM testbench topology:
+# --------------------------------------------------------------
+# Name                       Type                    Size  Value
+# --------------------------------------------------------------
+# uvm_test_top               eth_test                -     @478 
+#   env_h                    eth_env                 -     @485 
+#     agnt_mac[0]            eth_agnt                -     @492 
+#       drv_h                eth_drv                 -     @811 
+#         rsp_port           uvm_analysis_port       -     @826 
+#         seq_item_port      uvm_seq_item_pull_port  -     @818 
+#       mon_h                eth_mon                 -     @834 
+#         rx_ap              uvm_analysis_port       -     @849 
+#         tx_ap              uvm_analysis_port       -     @841 
+#       seqr_h               eth_seqr                -     @702 
+#         rsp_export         uvm_analysis_export     -     @709 
+#         seq_item_export    uvm_seq_item_pull_imp   -     @803 
+#         arbitration_queue  array                   0     -    
+#         lock_queue         array                   0     -    
+#         num_last_reqs      integral                32    'd1  
+#         num_last_rsps      integral                32    'd1  
+#     agnt_mac[1]            eth_agnt                -     @499 
+#       drv_h                eth_drv                 -     @982 
+#         rsp_port           uvm_analysis_port       -     @997 
+#         seq_item_port      uvm_seq_item_pull_port  -     @989 
+#       mon_h                eth_mon                 -     @1005
+#         rx_ap              uvm_analysis_port       -     @1020
+#         tx_ap              uvm_analysis_port       -     @1012
+#       seqr_h               eth_seqr                -     @873 
+#         rsp_export         uvm_analysis_export     -     @880 
+#         seq_item_export    uvm_seq_item_pull_imp   -     @974 
+#         arbitration_queue  array                   0     -    
+#         lock_queue         array                   0     -    
+#         num_last_reqs      integral                32    'd1  
+#         num_last_rsps      integral                32    'd1  
+#     eth_virtual_seqr       eth_virtual_seqr        -     @592 
+#       rsp_export           uvm_analysis_export     -     @599 
+#       seq_item_export      uvm_seq_item_pull_imp   -     @693 
+#       arbitration_queue    array                   0     -    
+#       lock_queue           array                   0     -    
+#       num_last_reqs        integral                32    'd1  
+#       num_last_rsps        integral                32    'd1  
+#     sbscr_h                eth_sbscr               -     @545 
+#       ai_1[0]              uvm_analysis_imp_ap_3   -     @560 
+#       ai_1[1]              uvm_analysis_imp_ap_3   -     @568 
+#       ai_2[0]              uvm_analysis_imp_ap_4   -     @576 
+#       ai_2[1]              uvm_analysis_imp_ap_4   -     @584 
+#       analysis_imp         uvm_analysis_imp        -     @552 
+#     scb_h                  eth_scb                 -     @506 
+#       ai_1[0]              uvm_analysis_imp_ap_1   -     @513 
+#       ai_1[1]              uvm_analysis_imp_ap_1   -     @521 
+#       ai_2[0]              uvm_analysis_imp_ap_2   -     @529 
+#       ai_2[1]              uvm_analysis_imp_ap_2   -     @537 
+# --------------------------------------------------------------
+# 
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(29) @ 0: uvm_test_top.env_h.agnt_mac[1].mon_h [eth_mon] Entered the run phase of monitor
+# UVM_INFO ./top/../config/../agents/eth_drv.sv(20) @ 0: uvm_test_top.env_h.agnt_mac[1].drv_h [eth_drv] Entered the run phase of driver
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(29) @ 0: uvm_test_top.env_h.agnt_mac[0].mon_h [eth_mon] Entered the run phase of monitor
+# UVM_INFO ./top/../config/../agents/eth_drv.sv(20) @ 0: uvm_test_top.env_h.agnt_mac[0].drv_h [eth_drv] Entered the run phase of driver
+# UVM_INFO ./top/../config/../sequences/eth_sequence.sv(33) @ 0: uvm_test_top.env_h.eth_virtual_seqr@@v_seq [virtual_seq] virtual_seq: Inside Body
+# UVM_INFO ./top/../config/../sequences/eth_sequence.sv(10) @ 0: uvm_test_top.env_h.agnt_mac[0].seqr_h@@seq1 [rand_data] rand_data: Inside Body
+# //  Questa Sim-64
+# //  Version 2025.2_1 win64 Jun 25 2025
+# //
+# // Unpublished work. Copyright 2025 Siemens
+# //
+# // This material contains trade secrets or otherwise confidential information
+# // owned by Siemens Industry Software Inc. or its affiliates (collectively,
+# // "SISW"), or its licensors. Access to and use of this information is strictly
+# // limited as set forth in the Customer's applicable agreements with SISW.
+# //
+# // This material may not be copied, distributed, or otherwise disclosed outside
+# // of the Customer's facilities without the express written permission of SISW,
+# // and may not be used in any way not expressly authorized by SISW.
+# //
+# Siemens software version 2025.2_1 (Build number 0)
+# Unpublished work. Copyright 2026 Siemens
+# qwavedb_dumpvars: Initiating qwavedb waveform capturing
+# 
+# 
+# qwavedb_dumpvars: Done initiating qwavedb waveform capturing
+# 
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(25) @ 4: uvm_test_top.env_h.sbscr_h [eth_sbscr] Expected TXD = b4
+# UVM_INFO ./top/../config/../env/eth_scb.sv(34) @ 4: uvm_test_top.env_h.scb_h [eth_scb] Expected TXD = b4
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(43) @ 4: uvm_test_top.env_h.agnt_mac[0].mon_h [TX MONITOR] TXD = b4
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(29) @ 4: uvm_test_top.env_h.sbscr_h [eth_sbscr] Actual RXD = 0
+# UVM_INFO ./top/../config/../env/eth_scb.sv(39) @ 4: uvm_test_top.env_h.scb_h [eth_scb] Actual RXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(50) @ 4: uvm_test_top.env_h.agnt_mac[0].mon_h [RX MONITOR] RXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(51) @ 4: uvm_test_top.env_h.agnt_mac[0].mon_h [RX MONITOR] counter vaue = 2
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(25) @ 4: uvm_test_top.env_h.sbscr_h [eth_sbscr] Expected TXD = 0
+# UVM_INFO ./top/../config/../env/eth_scb.sv(34) @ 4: uvm_test_top.env_h.scb_h [eth_scb] Expected TXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(43) @ 4: uvm_test_top.env_h.agnt_mac[1].mon_h [TX MONITOR] TXD = 0
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(29) @ 4: uvm_test_top.env_h.sbscr_h [eth_sbscr] Actual RXD = b4
+# UVM_INFO ./top/../config/../env/eth_scb.sv(39) @ 4: uvm_test_top.env_h.scb_h [eth_scb] Actual RXD = b4
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(50) @ 4: uvm_test_top.env_h.agnt_mac[1].mon_h [RX MONITOR] RXD = b4
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(51) @ 4: uvm_test_top.env_h.agnt_mac[1].mon_h [RX MONITOR] counter vaue = 2
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(25) @ 12: uvm_test_top.env_h.sbscr_h [eth_sbscr] Expected TXD = 55
+# UVM_INFO ./top/../config/../env/eth_scb.sv(34) @ 12: uvm_test_top.env_h.scb_h [eth_scb] Expected TXD = 55
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(43) @ 12: uvm_test_top.env_h.agnt_mac[0].mon_h [TX MONITOR] TXD = 55
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(29) @ 12: uvm_test_top.env_h.sbscr_h [eth_sbscr] Actual RXD = 0
+# UVM_INFO ./top/../config/../env/eth_scb.sv(39) @ 12: uvm_test_top.env_h.scb_h [eth_scb] Actual RXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(50) @ 12: uvm_test_top.env_h.agnt_mac[0].mon_h [RX MONITOR] RXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(51) @ 12: uvm_test_top.env_h.agnt_mac[0].mon_h [RX MONITOR] counter vaue = 2
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(25) @ 12: uvm_test_top.env_h.sbscr_h [eth_sbscr] Expected TXD = 0
+# UVM_INFO ./top/../config/../env/eth_scb.sv(34) @ 12: uvm_test_top.env_h.scb_h [eth_scb] Expected TXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(43) @ 12: uvm_test_top.env_h.agnt_mac[1].mon_h [TX MONITOR] TXD = 0
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(29) @ 12: uvm_test_top.env_h.sbscr_h [eth_sbscr] Actual RXD = 55
+# UVM_INFO ./top/../config/../env/eth_scb.sv(39) @ 12: uvm_test_top.env_h.scb_h [eth_scb] Actual RXD = 55
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(50) @ 12: uvm_test_top.env_h.agnt_mac[1].mon_h [RX MONITOR] RXD = 55
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(51) @ 12: uvm_test_top.env_h.agnt_mac[1].mon_h [RX MONITOR] counter vaue = 2
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(25) @ 20: uvm_test_top.env_h.sbscr_h [eth_sbscr] Expected TXD = 7d
+# UVM_INFO ./top/../config/../env/eth_scb.sv(34) @ 20: uvm_test_top.env_h.scb_h [eth_scb] Expected TXD = 7d
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(43) @ 20: uvm_test_top.env_h.agnt_mac[0].mon_h [TX MONITOR] TXD = 7d
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(29) @ 20: uvm_test_top.env_h.sbscr_h [eth_sbscr] Actual RXD = 0
+# UVM_INFO ./top/../config/../env/eth_scb.sv(39) @ 20: uvm_test_top.env_h.scb_h [eth_scb] Actual RXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(50) @ 20: uvm_test_top.env_h.agnt_mac[0].mon_h [RX MONITOR] RXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(51) @ 20: uvm_test_top.env_h.agnt_mac[0].mon_h [RX MONITOR] counter vaue = 2
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(25) @ 20: uvm_test_top.env_h.sbscr_h [eth_sbscr] Expected TXD = 0
+# UVM_INFO ./top/../config/../env/eth_scb.sv(34) @ 20: uvm_test_top.env_h.scb_h [eth_scb] Expected TXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(43) @ 20: uvm_test_top.env_h.agnt_mac[1].mon_h [TX MONITOR] TXD = 0
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(29) @ 20: uvm_test_top.env_h.sbscr_h [eth_sbscr] Actual RXD = 7d
+# UVM_INFO ./top/../config/../env/eth_scb.sv(39) @ 20: uvm_test_top.env_h.scb_h [eth_scb] Actual RXD = 7d
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(50) @ 20: uvm_test_top.env_h.agnt_mac[1].mon_h [RX MONITOR] RXD = 7d
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(51) @ 20: uvm_test_top.env_h.agnt_mac[1].mon_h [RX MONITOR] counter vaue = 2
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(25) @ 28: uvm_test_top.env_h.sbscr_h [eth_sbscr] Expected TXD = 47
+# UVM_INFO ./top/../config/../env/eth_scb.sv(34) @ 28: uvm_test_top.env_h.scb_h [eth_scb] Expected TXD = 47
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(43) @ 28: uvm_test_top.env_h.agnt_mac[0].mon_h [TX MONITOR] TXD = 47
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(29) @ 28: uvm_test_top.env_h.sbscr_h [eth_sbscr] Actual RXD = 0
+# UVM_INFO ./top/../config/../env/eth_scb.sv(39) @ 28: uvm_test_top.env_h.scb_h [eth_scb] Actual RXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(50) @ 28: uvm_test_top.env_h.agnt_mac[0].mon_h [RX MONITOR] RXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(51) @ 28: uvm_test_top.env_h.agnt_mac[0].mon_h [RX MONITOR] counter vaue = 2
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(25) @ 28: uvm_test_top.env_h.sbscr_h [eth_sbscr] Expected TXD = 0
+# UVM_INFO ./top/../config/../env/eth_scb.sv(34) @ 28: uvm_test_top.env_h.scb_h [eth_scb] Expected TXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(43) @ 28: uvm_test_top.env_h.agnt_mac[1].mon_h [TX MONITOR] TXD = 0
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(29) @ 28: uvm_test_top.env_h.sbscr_h [eth_sbscr] Actual RXD = 47
+# UVM_INFO ./top/../config/../env/eth_scb.sv(39) @ 28: uvm_test_top.env_h.scb_h [eth_scb] Actual RXD = 47
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(50) @ 28: uvm_test_top.env_h.agnt_mac[1].mon_h [RX MONITOR] RXD = 47
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(51) @ 28: uvm_test_top.env_h.agnt_mac[1].mon_h [RX MONITOR] counter vaue = 2
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(25) @ 36: uvm_test_top.env_h.sbscr_h [eth_sbscr] Expected TXD = 7d
+# UVM_INFO ./top/../config/../env/eth_scb.sv(34) @ 36: uvm_test_top.env_h.scb_h [eth_scb] Expected TXD = 7d
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(43) @ 36: uvm_test_top.env_h.agnt_mac[0].mon_h [TX MONITOR] TXD = 7d
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(29) @ 36: uvm_test_top.env_h.sbscr_h [eth_sbscr] Actual RXD = 0
+# UVM_INFO ./top/../config/../env/eth_scb.sv(39) @ 36: uvm_test_top.env_h.scb_h [eth_scb] Actual RXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(50) @ 36: uvm_test_top.env_h.agnt_mac[0].mon_h [RX MONITOR] RXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(51) @ 36: uvm_test_top.env_h.agnt_mac[0].mon_h [RX MONITOR] counter vaue = 2
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(25) @ 36: uvm_test_top.env_h.sbscr_h [eth_sbscr] Expected TXD = 0
+# UVM_INFO ./top/../config/../env/eth_scb.sv(34) @ 36: uvm_test_top.env_h.scb_h [eth_scb] Expected TXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(43) @ 36: uvm_test_top.env_h.agnt_mac[1].mon_h [TX MONITOR] TXD = 0
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(29) @ 36: uvm_test_top.env_h.sbscr_h [eth_sbscr] Actual RXD = 7d
+# UVM_INFO ./top/../config/../env/eth_scb.sv(39) @ 36: uvm_test_top.env_h.scb_h [eth_scb] Actual RXD = 7d
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(50) @ 36: uvm_test_top.env_h.agnt_mac[1].mon_h [RX MONITOR] RXD = 7d
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(51) @ 36: uvm_test_top.env_h.agnt_mac[1].mon_h [RX MONITOR] counter vaue = 2
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(25) @ 44: uvm_test_top.env_h.sbscr_h [eth_sbscr] Expected TXD = 26
+# UVM_INFO ./top/../config/../env/eth_scb.sv(34) @ 44: uvm_test_top.env_h.scb_h [eth_scb] Expected TXD = 26
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(43) @ 44: uvm_test_top.env_h.agnt_mac[0].mon_h [TX MONITOR] TXD = 26
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(29) @ 44: uvm_test_top.env_h.sbscr_h [eth_sbscr] Actual RXD = 0
+# UVM_INFO ./top/../config/../env/eth_scb.sv(39) @ 44: uvm_test_top.env_h.scb_h [eth_scb] Actual RXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(50) @ 44: uvm_test_top.env_h.agnt_mac[0].mon_h [RX MONITOR] RXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(51) @ 44: uvm_test_top.env_h.agnt_mac[0].mon_h [RX MONITOR] counter vaue = 2
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(25) @ 44: uvm_test_top.env_h.sbscr_h [eth_sbscr] Expected TXD = 0
+# UVM_INFO ./top/../config/../env/eth_scb.sv(34) @ 44: uvm_test_top.env_h.scb_h [eth_scb] Expected TXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(43) @ 44: uvm_test_top.env_h.agnt_mac[1].mon_h [TX MONITOR] TXD = 0
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(29) @ 44: uvm_test_top.env_h.sbscr_h [eth_sbscr] Actual RXD = 26
+# UVM_INFO ./top/../config/../env/eth_scb.sv(39) @ 44: uvm_test_top.env_h.scb_h [eth_scb] Actual RXD = 26
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(50) @ 44: uvm_test_top.env_h.agnt_mac[1].mon_h [RX MONITOR] RXD = 26
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(51) @ 44: uvm_test_top.env_h.agnt_mac[1].mon_h [RX MONITOR] counter vaue = 2
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(25) @ 52: uvm_test_top.env_h.sbscr_h [eth_sbscr] Expected TXD = 8
+# UVM_INFO ./top/../config/../env/eth_scb.sv(34) @ 52: uvm_test_top.env_h.scb_h [eth_scb] Expected TXD = 8
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(43) @ 52: uvm_test_top.env_h.agnt_mac[0].mon_h [TX MONITOR] TXD = 8
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(29) @ 52: uvm_test_top.env_h.sbscr_h [eth_sbscr] Actual RXD = 0
+# UVM_INFO ./top/../config/../env/eth_scb.sv(39) @ 52: uvm_test_top.env_h.scb_h [eth_scb] Actual RXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(50) @ 52: uvm_test_top.env_h.agnt_mac[0].mon_h [RX MONITOR] RXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(51) @ 52: uvm_test_top.env_h.agnt_mac[0].mon_h [RX MONITOR] counter vaue = 2
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(25) @ 52: uvm_test_top.env_h.sbscr_h [eth_sbscr] Expected TXD = 0
+# UVM_INFO ./top/../config/../env/eth_scb.sv(34) @ 52: uvm_test_top.env_h.scb_h [eth_scb] Expected TXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(43) @ 52: uvm_test_top.env_h.agnt_mac[1].mon_h [TX MONITOR] TXD = 0
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(29) @ 52: uvm_test_top.env_h.sbscr_h [eth_sbscr] Actual RXD = 8
+# UVM_INFO ./top/../config/../env/eth_scb.sv(39) @ 52: uvm_test_top.env_h.scb_h [eth_scb] Actual RXD = 8
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(50) @ 52: uvm_test_top.env_h.agnt_mac[1].mon_h [RX MONITOR] RXD = 8
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(51) @ 52: uvm_test_top.env_h.agnt_mac[1].mon_h [RX MONITOR] counter vaue = 2
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(25) @ 60: uvm_test_top.env_h.sbscr_h [eth_sbscr] Expected TXD = 82
+# UVM_INFO ./top/../config/../env/eth_scb.sv(34) @ 60: uvm_test_top.env_h.scb_h [eth_scb] Expected TXD = 82
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(43) @ 60: uvm_test_top.env_h.agnt_mac[0].mon_h [TX MONITOR] TXD = 82
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(29) @ 60: uvm_test_top.env_h.sbscr_h [eth_sbscr] Actual RXD = 0
+# UVM_INFO ./top/../config/../env/eth_scb.sv(39) @ 60: uvm_test_top.env_h.scb_h [eth_scb] Actual RXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(50) @ 60: uvm_test_top.env_h.agnt_mac[0].mon_h [RX MONITOR] RXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(51) @ 60: uvm_test_top.env_h.agnt_mac[0].mon_h [RX MONITOR] counter vaue = 2
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(25) @ 60: uvm_test_top.env_h.sbscr_h [eth_sbscr] Expected TXD = 0
+# UVM_INFO ./top/../config/../env/eth_scb.sv(34) @ 60: uvm_test_top.env_h.scb_h [eth_scb] Expected TXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(43) @ 60: uvm_test_top.env_h.agnt_mac[1].mon_h [TX MONITOR] TXD = 0
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(29) @ 60: uvm_test_top.env_h.sbscr_h [eth_sbscr] Actual RXD = 82
+# UVM_INFO ./top/../config/../env/eth_scb.sv(39) @ 60: uvm_test_top.env_h.scb_h [eth_scb] Actual RXD = 82
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(50) @ 60: uvm_test_top.env_h.agnt_mac[1].mon_h [RX MONITOR] RXD = 82
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(51) @ 60: uvm_test_top.env_h.agnt_mac[1].mon_h [RX MONITOR] counter vaue = 2
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(25) @ 68: uvm_test_top.env_h.sbscr_h [eth_sbscr] Expected TXD = 5a
+# UVM_INFO ./top/../config/../env/eth_scb.sv(34) @ 68: uvm_test_top.env_h.scb_h [eth_scb] Expected TXD = 5a
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(43) @ 68: uvm_test_top.env_h.agnt_mac[0].mon_h [TX MONITOR] TXD = 5a
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(29) @ 68: uvm_test_top.env_h.sbscr_h [eth_sbscr] Actual RXD = 0
+# UVM_INFO ./top/../config/../env/eth_scb.sv(39) @ 68: uvm_test_top.env_h.scb_h [eth_scb] Actual RXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(50) @ 68: uvm_test_top.env_h.agnt_mac[0].mon_h [RX MONITOR] RXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(51) @ 68: uvm_test_top.env_h.agnt_mac[0].mon_h [RX MONITOR] counter vaue = 2
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(25) @ 68: uvm_test_top.env_h.sbscr_h [eth_sbscr] Expected TXD = 0
+# UVM_INFO ./top/../config/../env/eth_scb.sv(34) @ 68: uvm_test_top.env_h.scb_h [eth_scb] Expected TXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(43) @ 68: uvm_test_top.env_h.agnt_mac[1].mon_h [TX MONITOR] TXD = 0
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(29) @ 68: uvm_test_top.env_h.sbscr_h [eth_sbscr] Actual RXD = 5a
+# UVM_INFO ./top/../config/../env/eth_scb.sv(39) @ 68: uvm_test_top.env_h.scb_h [eth_scb] Actual RXD = 5a
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(50) @ 68: uvm_test_top.env_h.agnt_mac[1].mon_h [RX MONITOR] RXD = 5a
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(51) @ 68: uvm_test_top.env_h.agnt_mac[1].mon_h [RX MONITOR] counter vaue = 2
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(25) @ 76: uvm_test_top.env_h.sbscr_h [eth_sbscr] Expected TXD = 5
+# UVM_INFO ./top/../config/../env/eth_scb.sv(34) @ 76: uvm_test_top.env_h.scb_h [eth_scb] Expected TXD = 5
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(43) @ 76: uvm_test_top.env_h.agnt_mac[0].mon_h [TX MONITOR] TXD = 5
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(29) @ 76: uvm_test_top.env_h.sbscr_h [eth_sbscr] Actual RXD = 0
+# UVM_INFO ./top/../config/../env/eth_scb.sv(39) @ 76: uvm_test_top.env_h.scb_h [eth_scb] Actual RXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(50) @ 76: uvm_test_top.env_h.agnt_mac[0].mon_h [RX MONITOR] RXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(51) @ 76: uvm_test_top.env_h.agnt_mac[0].mon_h [RX MONITOR] counter vaue = 2
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(25) @ 76: uvm_test_top.env_h.sbscr_h [eth_sbscr] Expected TXD = 0
+# UVM_INFO ./top/../config/../env/eth_scb.sv(34) @ 76: uvm_test_top.env_h.scb_h [eth_scb] Expected TXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(43) @ 76: uvm_test_top.env_h.agnt_mac[1].mon_h [TX MONITOR] TXD = 0
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(29) @ 76: uvm_test_top.env_h.sbscr_h [eth_sbscr] Actual RXD = 5
+# UVM_INFO ./top/../config/../env/eth_scb.sv(39) @ 76: uvm_test_top.env_h.scb_h [eth_scb] Actual RXD = 5
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(50) @ 76: uvm_test_top.env_h.agnt_mac[1].mon_h [RX MONITOR] RXD = 5
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(51) @ 76: uvm_test_top.env_h.agnt_mac[1].mon_h [RX MONITOR] counter vaue = 2
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(25) @ 84: uvm_test_top.env_h.sbscr_h [eth_sbscr] Expected TXD = fa
+# UVM_INFO ./top/../config/../env/eth_scb.sv(34) @ 84: uvm_test_top.env_h.scb_h [eth_scb] Expected TXD = fa
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(43) @ 84: uvm_test_top.env_h.agnt_mac[0].mon_h [TX MONITOR] TXD = fa
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(29) @ 84: uvm_test_top.env_h.sbscr_h [eth_sbscr] Actual RXD = 0
+# UVM_INFO ./top/../config/../env/eth_scb.sv(39) @ 84: uvm_test_top.env_h.scb_h [eth_scb] Actual RXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(50) @ 84: uvm_test_top.env_h.agnt_mac[0].mon_h [RX MONITOR] RXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(51) @ 84: uvm_test_top.env_h.agnt_mac[0].mon_h [RX MONITOR] counter vaue = 2
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(25) @ 84: uvm_test_top.env_h.sbscr_h [eth_sbscr] Expected TXD = 0
+# UVM_INFO ./top/../config/../env/eth_scb.sv(34) @ 84: uvm_test_top.env_h.scb_h [eth_scb] Expected TXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(43) @ 84: uvm_test_top.env_h.agnt_mac[1].mon_h [TX MONITOR] TXD = 0
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(29) @ 84: uvm_test_top.env_h.sbscr_h [eth_sbscr] Actual RXD = fa
+# UVM_INFO ./top/../config/../env/eth_scb.sv(39) @ 84: uvm_test_top.env_h.scb_h [eth_scb] Actual RXD = fa
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(50) @ 84: uvm_test_top.env_h.agnt_mac[1].mon_h [RX MONITOR] RXD = fa
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(51) @ 84: uvm_test_top.env_h.agnt_mac[1].mon_h [RX MONITOR] counter vaue = 2
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(25) @ 92: uvm_test_top.env_h.sbscr_h [eth_sbscr] Expected TXD = ef
+# UVM_INFO ./top/../config/../env/eth_scb.sv(34) @ 92: uvm_test_top.env_h.scb_h [eth_scb] Expected TXD = ef
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(43) @ 92: uvm_test_top.env_h.agnt_mac[0].mon_h [TX MONITOR] TXD = ef
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(29) @ 92: uvm_test_top.env_h.sbscr_h [eth_sbscr] Actual RXD = 0
+# UVM_INFO ./top/../config/../env/eth_scb.sv(39) @ 92: uvm_test_top.env_h.scb_h [eth_scb] Actual RXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(50) @ 92: uvm_test_top.env_h.agnt_mac[0].mon_h [RX MONITOR] RXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(51) @ 92: uvm_test_top.env_h.agnt_mac[0].mon_h [RX MONITOR] counter vaue = 2
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(25) @ 92: uvm_test_top.env_h.sbscr_h [eth_sbscr] Expected TXD = 0
+# UVM_INFO ./top/../config/../env/eth_scb.sv(34) @ 92: uvm_test_top.env_h.scb_h [eth_scb] Expected TXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(43) @ 92: uvm_test_top.env_h.agnt_mac[1].mon_h [TX MONITOR] TXD = 0
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(29) @ 92: uvm_test_top.env_h.sbscr_h [eth_sbscr] Actual RXD = ef
+# UVM_INFO ./top/../config/../env/eth_scb.sv(39) @ 92: uvm_test_top.env_h.scb_h [eth_scb] Actual RXD = ef
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(50) @ 92: uvm_test_top.env_h.agnt_mac[1].mon_h [RX MONITOR] RXD = ef
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(51) @ 92: uvm_test_top.env_h.agnt_mac[1].mon_h [RX MONITOR] counter vaue = 2
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(25) @ 100: uvm_test_top.env_h.sbscr_h [eth_sbscr] Expected TXD = 29
+# UVM_INFO ./top/../config/../env/eth_scb.sv(34) @ 100: uvm_test_top.env_h.scb_h [eth_scb] Expected TXD = 29
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(43) @ 100: uvm_test_top.env_h.agnt_mac[0].mon_h [TX MONITOR] TXD = 29
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(29) @ 100: uvm_test_top.env_h.sbscr_h [eth_sbscr] Actual RXD = 0
+# UVM_INFO ./top/../config/../env/eth_scb.sv(39) @ 100: uvm_test_top.env_h.scb_h [eth_scb] Actual RXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(50) @ 100: uvm_test_top.env_h.agnt_mac[0].mon_h [RX MONITOR] RXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(51) @ 100: uvm_test_top.env_h.agnt_mac[0].mon_h [RX MONITOR] counter vaue = 2
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(25) @ 100: uvm_test_top.env_h.sbscr_h [eth_sbscr] Expected TXD = 0
+# UVM_INFO ./top/../config/../env/eth_scb.sv(34) @ 100: uvm_test_top.env_h.scb_h [eth_scb] Expected TXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(43) @ 100: uvm_test_top.env_h.agnt_mac[1].mon_h [TX MONITOR] TXD = 0
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(29) @ 100: uvm_test_top.env_h.sbscr_h [eth_sbscr] Actual RXD = 29
+# UVM_INFO ./top/../config/../env/eth_scb.sv(39) @ 100: uvm_test_top.env_h.scb_h [eth_scb] Actual RXD = 29
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(50) @ 100: uvm_test_top.env_h.agnt_mac[1].mon_h [RX MONITOR] RXD = 29
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(51) @ 100: uvm_test_top.env_h.agnt_mac[1].mon_h [RX MONITOR] counter vaue = 2
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(25) @ 108: uvm_test_top.env_h.sbscr_h [eth_sbscr] Expected TXD = ed
+# UVM_INFO ./top/../config/../env/eth_scb.sv(34) @ 108: uvm_test_top.env_h.scb_h [eth_scb] Expected TXD = ed
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(43) @ 108: uvm_test_top.env_h.agnt_mac[0].mon_h [TX MONITOR] TXD = ed
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(29) @ 108: uvm_test_top.env_h.sbscr_h [eth_sbscr] Actual RXD = 0
+# UVM_INFO ./top/../config/../env/eth_scb.sv(39) @ 108: uvm_test_top.env_h.scb_h [eth_scb] Actual RXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(50) @ 108: uvm_test_top.env_h.agnt_mac[0].mon_h [RX MONITOR] RXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(51) @ 108: uvm_test_top.env_h.agnt_mac[0].mon_h [RX MONITOR] counter vaue = 2
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(25) @ 108: uvm_test_top.env_h.sbscr_h [eth_sbscr] Expected TXD = 0
+# UVM_INFO ./top/../config/../env/eth_scb.sv(34) @ 108: uvm_test_top.env_h.scb_h [eth_scb] Expected TXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(43) @ 108: uvm_test_top.env_h.agnt_mac[1].mon_h [TX MONITOR] TXD = 0
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(29) @ 108: uvm_test_top.env_h.sbscr_h [eth_sbscr] Actual RXD = ed
+# UVM_INFO ./top/../config/../env/eth_scb.sv(39) @ 108: uvm_test_top.env_h.scb_h [eth_scb] Actual RXD = ed
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(50) @ 108: uvm_test_top.env_h.agnt_mac[1].mon_h [RX MONITOR] RXD = ed
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(51) @ 108: uvm_test_top.env_h.agnt_mac[1].mon_h [RX MONITOR] counter vaue = 2
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(25) @ 116: uvm_test_top.env_h.sbscr_h [eth_sbscr] Expected TXD = 4e
+# UVM_INFO ./top/../config/../env/eth_scb.sv(34) @ 116: uvm_test_top.env_h.scb_h [eth_scb] Expected TXD = 4e
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(43) @ 116: uvm_test_top.env_h.agnt_mac[0].mon_h [TX MONITOR] TXD = 4e
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(29) @ 116: uvm_test_top.env_h.sbscr_h [eth_sbscr] Actual RXD = 0
+# UVM_INFO ./top/../config/../env/eth_scb.sv(39) @ 116: uvm_test_top.env_h.scb_h [eth_scb] Actual RXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(50) @ 116: uvm_test_top.env_h.agnt_mac[0].mon_h [RX MONITOR] RXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(51) @ 116: uvm_test_top.env_h.agnt_mac[0].mon_h [RX MONITOR] counter vaue = 2
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(25) @ 116: uvm_test_top.env_h.sbscr_h [eth_sbscr] Expected TXD = 0
+# UVM_INFO ./top/../config/../env/eth_scb.sv(34) @ 116: uvm_test_top.env_h.scb_h [eth_scb] Expected TXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(43) @ 116: uvm_test_top.env_h.agnt_mac[1].mon_h [TX MONITOR] TXD = 0
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(29) @ 116: uvm_test_top.env_h.sbscr_h [eth_sbscr] Actual RXD = 4e
+# UVM_INFO ./top/../config/../env/eth_scb.sv(39) @ 116: uvm_test_top.env_h.scb_h [eth_scb] Actual RXD = 4e
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(50) @ 116: uvm_test_top.env_h.agnt_mac[1].mon_h [RX MONITOR] RXD = 4e
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(51) @ 116: uvm_test_top.env_h.agnt_mac[1].mon_h [RX MONITOR] counter vaue = 2
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(25) @ 124: uvm_test_top.env_h.sbscr_h [eth_sbscr] Expected TXD = 3d
+# UVM_INFO ./top/../config/../env/eth_scb.sv(34) @ 124: uvm_test_top.env_h.scb_h [eth_scb] Expected TXD = 3d
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(43) @ 124: uvm_test_top.env_h.agnt_mac[0].mon_h [TX MONITOR] TXD = 3d
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(29) @ 124: uvm_test_top.env_h.sbscr_h [eth_sbscr] Actual RXD = 0
+# UVM_INFO ./top/../config/../env/eth_scb.sv(39) @ 124: uvm_test_top.env_h.scb_h [eth_scb] Actual RXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(50) @ 124: uvm_test_top.env_h.agnt_mac[0].mon_h [RX MONITOR] RXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(51) @ 124: uvm_test_top.env_h.agnt_mac[0].mon_h [RX MONITOR] counter vaue = 2
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(25) @ 124: uvm_test_top.env_h.sbscr_h [eth_sbscr] Expected TXD = 0
+# UVM_INFO ./top/../config/../env/eth_scb.sv(34) @ 124: uvm_test_top.env_h.scb_h [eth_scb] Expected TXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(43) @ 124: uvm_test_top.env_h.agnt_mac[1].mon_h [TX MONITOR] TXD = 0
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(29) @ 124: uvm_test_top.env_h.sbscr_h [eth_sbscr] Actual RXD = 3d
+# UVM_INFO ./top/../config/../env/eth_scb.sv(39) @ 124: uvm_test_top.env_h.scb_h [eth_scb] Actual RXD = 3d
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(50) @ 124: uvm_test_top.env_h.agnt_mac[1].mon_h [RX MONITOR] RXD = 3d
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(51) @ 124: uvm_test_top.env_h.agnt_mac[1].mon_h [RX MONITOR] counter vaue = 2
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(25) @ 132: uvm_test_top.env_h.sbscr_h [eth_sbscr] Expected TXD = 86
+# UVM_INFO ./top/../config/../env/eth_scb.sv(34) @ 132: uvm_test_top.env_h.scb_h [eth_scb] Expected TXD = 86
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(43) @ 132: uvm_test_top.env_h.agnt_mac[0].mon_h [TX MONITOR] TXD = 86
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(29) @ 132: uvm_test_top.env_h.sbscr_h [eth_sbscr] Actual RXD = 0
+# UVM_INFO ./top/../config/../env/eth_scb.sv(39) @ 132: uvm_test_top.env_h.scb_h [eth_scb] Actual RXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(50) @ 132: uvm_test_top.env_h.agnt_mac[0].mon_h [RX MONITOR] RXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(51) @ 132: uvm_test_top.env_h.agnt_mac[0].mon_h [RX MONITOR] counter vaue = 2
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(25) @ 132: uvm_test_top.env_h.sbscr_h [eth_sbscr] Expected TXD = 0
+# UVM_INFO ./top/../config/../env/eth_scb.sv(34) @ 132: uvm_test_top.env_h.scb_h [eth_scb] Expected TXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(43) @ 132: uvm_test_top.env_h.agnt_mac[1].mon_h [TX MONITOR] TXD = 0
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(29) @ 132: uvm_test_top.env_h.sbscr_h [eth_sbscr] Actual RXD = 86
+# UVM_INFO ./top/../config/../env/eth_scb.sv(39) @ 132: uvm_test_top.env_h.scb_h [eth_scb] Actual RXD = 86
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(50) @ 132: uvm_test_top.env_h.agnt_mac[1].mon_h [RX MONITOR] RXD = 86
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(51) @ 132: uvm_test_top.env_h.agnt_mac[1].mon_h [RX MONITOR] counter vaue = 2
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(25) @ 140: uvm_test_top.env_h.sbscr_h [eth_sbscr] Expected TXD = 3b
+# UVM_INFO ./top/../config/../env/eth_scb.sv(34) @ 140: uvm_test_top.env_h.scb_h [eth_scb] Expected TXD = 3b
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(43) @ 140: uvm_test_top.env_h.agnt_mac[0].mon_h [TX MONITOR] TXD = 3b
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(29) @ 140: uvm_test_top.env_h.sbscr_h [eth_sbscr] Actual RXD = 0
+# UVM_INFO ./top/../config/../env/eth_scb.sv(39) @ 140: uvm_test_top.env_h.scb_h [eth_scb] Actual RXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(50) @ 140: uvm_test_top.env_h.agnt_mac[0].mon_h [RX MONITOR] RXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(51) @ 140: uvm_test_top.env_h.agnt_mac[0].mon_h [RX MONITOR] counter vaue = 2
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(25) @ 140: uvm_test_top.env_h.sbscr_h [eth_sbscr] Expected TXD = 0
+# UVM_INFO ./top/../config/../env/eth_scb.sv(34) @ 140: uvm_test_top.env_h.scb_h [eth_scb] Expected TXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(43) @ 140: uvm_test_top.env_h.agnt_mac[1].mon_h [TX MONITOR] TXD = 0
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(29) @ 140: uvm_test_top.env_h.sbscr_h [eth_sbscr] Actual RXD = 3b
+# UVM_INFO ./top/../config/../env/eth_scb.sv(39) @ 140: uvm_test_top.env_h.scb_h [eth_scb] Actual RXD = 3b
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(50) @ 140: uvm_test_top.env_h.agnt_mac[1].mon_h [RX MONITOR] RXD = 3b
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(51) @ 140: uvm_test_top.env_h.agnt_mac[1].mon_h [RX MONITOR] counter vaue = 2
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(25) @ 148: uvm_test_top.env_h.sbscr_h [eth_sbscr] Expected TXD = ff
+# UVM_INFO ./top/../config/../env/eth_scb.sv(34) @ 148: uvm_test_top.env_h.scb_h [eth_scb] Expected TXD = ff
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(43) @ 148: uvm_test_top.env_h.agnt_mac[0].mon_h [TX MONITOR] TXD = ff
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(29) @ 148: uvm_test_top.env_h.sbscr_h [eth_sbscr] Actual RXD = 0
+# UVM_INFO ./top/../config/../env/eth_scb.sv(39) @ 148: uvm_test_top.env_h.scb_h [eth_scb] Actual RXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(50) @ 148: uvm_test_top.env_h.agnt_mac[0].mon_h [RX MONITOR] RXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(51) @ 148: uvm_test_top.env_h.agnt_mac[0].mon_h [RX MONITOR] counter vaue = 2
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(25) @ 148: uvm_test_top.env_h.sbscr_h [eth_sbscr] Expected TXD = 0
+# UVM_INFO ./top/../config/../env/eth_scb.sv(34) @ 148: uvm_test_top.env_h.scb_h [eth_scb] Expected TXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(43) @ 148: uvm_test_top.env_h.agnt_mac[1].mon_h [TX MONITOR] TXD = 0
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(29) @ 148: uvm_test_top.env_h.sbscr_h [eth_sbscr] Actual RXD = ff
+# UVM_INFO ./top/../config/../env/eth_scb.sv(39) @ 148: uvm_test_top.env_h.scb_h [eth_scb] Actual RXD = ff
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(50) @ 148: uvm_test_top.env_h.agnt_mac[1].mon_h [RX MONITOR] RXD = ff
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(51) @ 148: uvm_test_top.env_h.agnt_mac[1].mon_h [RX MONITOR] counter vaue = 2
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(25) @ 156: uvm_test_top.env_h.sbscr_h [eth_sbscr] Expected TXD = ba
+# UVM_INFO ./top/../config/../env/eth_scb.sv(34) @ 156: uvm_test_top.env_h.scb_h [eth_scb] Expected TXD = ba
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(43) @ 156: uvm_test_top.env_h.agnt_mac[0].mon_h [TX MONITOR] TXD = ba
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(29) @ 156: uvm_test_top.env_h.sbscr_h [eth_sbscr] Actual RXD = 0
+# UVM_INFO ./top/../config/../env/eth_scb.sv(39) @ 156: uvm_test_top.env_h.scb_h [eth_scb] Actual RXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(50) @ 156: uvm_test_top.env_h.agnt_mac[0].mon_h [RX MONITOR] RXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(51) @ 156: uvm_test_top.env_h.agnt_mac[0].mon_h [RX MONITOR] counter vaue = 2
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(25) @ 156: uvm_test_top.env_h.sbscr_h [eth_sbscr] Expected TXD = 0
+# UVM_INFO ./top/../config/../env/eth_scb.sv(34) @ 156: uvm_test_top.env_h.scb_h [eth_scb] Expected TXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(43) @ 156: uvm_test_top.env_h.agnt_mac[1].mon_h [TX MONITOR] TXD = 0
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(29) @ 156: uvm_test_top.env_h.sbscr_h [eth_sbscr] Actual RXD = ba
+# UVM_INFO ./top/../config/../env/eth_scb.sv(39) @ 156: uvm_test_top.env_h.scb_h [eth_scb] Actual RXD = ba
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(50) @ 156: uvm_test_top.env_h.agnt_mac[1].mon_h [RX MONITOR] RXD = ba
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(51) @ 156: uvm_test_top.env_h.agnt_mac[1].mon_h [RX MONITOR] counter vaue = 2
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(25) @ 164: uvm_test_top.env_h.sbscr_h [eth_sbscr] Expected TXD = 29
+# UVM_INFO ./top/../config/../env/eth_scb.sv(34) @ 164: uvm_test_top.env_h.scb_h [eth_scb] Expected TXD = 29
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(43) @ 164: uvm_test_top.env_h.agnt_mac[0].mon_h [TX MONITOR] TXD = 29
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(29) @ 164: uvm_test_top.env_h.sbscr_h [eth_sbscr] Actual RXD = 0
+# UVM_INFO ./top/../config/../env/eth_scb.sv(39) @ 164: uvm_test_top.env_h.scb_h [eth_scb] Actual RXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(50) @ 164: uvm_test_top.env_h.agnt_mac[0].mon_h [RX MONITOR] RXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(51) @ 164: uvm_test_top.env_h.agnt_mac[0].mon_h [RX MONITOR] counter vaue = 2
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(25) @ 164: uvm_test_top.env_h.sbscr_h [eth_sbscr] Expected TXD = 0
+# UVM_INFO ./top/../config/../env/eth_scb.sv(34) @ 164: uvm_test_top.env_h.scb_h [eth_scb] Expected TXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(43) @ 164: uvm_test_top.env_h.agnt_mac[1].mon_h [TX MONITOR] TXD = 0
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(29) @ 164: uvm_test_top.env_h.sbscr_h [eth_sbscr] Actual RXD = 29
+# UVM_INFO ./top/../config/../env/eth_scb.sv(39) @ 164: uvm_test_top.env_h.scb_h [eth_scb] Actual RXD = 29
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(50) @ 164: uvm_test_top.env_h.agnt_mac[1].mon_h [RX MONITOR] RXD = 29
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(51) @ 164: uvm_test_top.env_h.agnt_mac[1].mon_h [RX MONITOR] counter vaue = 2
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(25) @ 172: uvm_test_top.env_h.sbscr_h [eth_sbscr] Expected TXD = 38
+# UVM_INFO ./top/../config/../env/eth_scb.sv(34) @ 172: uvm_test_top.env_h.scb_h [eth_scb] Expected TXD = 38
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(43) @ 172: uvm_test_top.env_h.agnt_mac[0].mon_h [TX MONITOR] TXD = 38
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(29) @ 172: uvm_test_top.env_h.sbscr_h [eth_sbscr] Actual RXD = 0
+# UVM_INFO ./top/../config/../env/eth_scb.sv(39) @ 172: uvm_test_top.env_h.scb_h [eth_scb] Actual RXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(50) @ 172: uvm_test_top.env_h.agnt_mac[0].mon_h [RX MONITOR] RXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(51) @ 172: uvm_test_top.env_h.agnt_mac[0].mon_h [RX MONITOR] counter vaue = 2
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(25) @ 172: uvm_test_top.env_h.sbscr_h [eth_sbscr] Expected TXD = 0
+# UVM_INFO ./top/../config/../env/eth_scb.sv(34) @ 172: uvm_test_top.env_h.scb_h [eth_scb] Expected TXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(43) @ 172: uvm_test_top.env_h.agnt_mac[1].mon_h [TX MONITOR] TXD = 0
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(29) @ 172: uvm_test_top.env_h.sbscr_h [eth_sbscr] Actual RXD = 38
+# UVM_INFO ./top/../config/../env/eth_scb.sv(39) @ 172: uvm_test_top.env_h.scb_h [eth_scb] Actual RXD = 38
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(50) @ 172: uvm_test_top.env_h.agnt_mac[1].mon_h [RX MONITOR] RXD = 38
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(51) @ 172: uvm_test_top.env_h.agnt_mac[1].mon_h [RX MONITOR] counter vaue = 2
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(25) @ 180: uvm_test_top.env_h.sbscr_h [eth_sbscr] Expected TXD = c8
+# UVM_INFO ./top/../config/../env/eth_scb.sv(34) @ 180: uvm_test_top.env_h.scb_h [eth_scb] Expected TXD = c8
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(43) @ 180: uvm_test_top.env_h.agnt_mac[0].mon_h [TX MONITOR] TXD = c8
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(29) @ 180: uvm_test_top.env_h.sbscr_h [eth_sbscr] Actual RXD = 0
+# UVM_INFO ./top/../config/../env/eth_scb.sv(39) @ 180: uvm_test_top.env_h.scb_h [eth_scb] Actual RXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(50) @ 180: uvm_test_top.env_h.agnt_mac[0].mon_h [RX MONITOR] RXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(51) @ 180: uvm_test_top.env_h.agnt_mac[0].mon_h [RX MONITOR] counter vaue = 2
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(25) @ 180: uvm_test_top.env_h.sbscr_h [eth_sbscr] Expected TXD = 0
+# UVM_INFO ./top/../config/../env/eth_scb.sv(34) @ 180: uvm_test_top.env_h.scb_h [eth_scb] Expected TXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(43) @ 180: uvm_test_top.env_h.agnt_mac[1].mon_h [TX MONITOR] TXD = 0
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(29) @ 180: uvm_test_top.env_h.sbscr_h [eth_sbscr] Actual RXD = c8
+# UVM_INFO ./top/../config/../env/eth_scb.sv(39) @ 180: uvm_test_top.env_h.scb_h [eth_scb] Actual RXD = c8
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(50) @ 180: uvm_test_top.env_h.agnt_mac[1].mon_h [RX MONITOR] RXD = c8
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(51) @ 180: uvm_test_top.env_h.agnt_mac[1].mon_h [RX MONITOR] counter vaue = 2
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(25) @ 188: uvm_test_top.env_h.sbscr_h [eth_sbscr] Expected TXD = 36
+# UVM_INFO ./top/../config/../env/eth_scb.sv(34) @ 188: uvm_test_top.env_h.scb_h [eth_scb] Expected TXD = 36
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(43) @ 188: uvm_test_top.env_h.agnt_mac[0].mon_h [TX MONITOR] TXD = 36
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(29) @ 188: uvm_test_top.env_h.sbscr_h [eth_sbscr] Actual RXD = 0
+# UVM_INFO ./top/../config/../env/eth_scb.sv(39) @ 188: uvm_test_top.env_h.scb_h [eth_scb] Actual RXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(50) @ 188: uvm_test_top.env_h.agnt_mac[0].mon_h [RX MONITOR] RXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(51) @ 188: uvm_test_top.env_h.agnt_mac[0].mon_h [RX MONITOR] counter vaue = 2
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(25) @ 188: uvm_test_top.env_h.sbscr_h [eth_sbscr] Expected TXD = 0
+# UVM_INFO ./top/../config/../env/eth_scb.sv(34) @ 188: uvm_test_top.env_h.scb_h [eth_scb] Expected TXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(43) @ 188: uvm_test_top.env_h.agnt_mac[1].mon_h [TX MONITOR] TXD = 0
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(29) @ 188: uvm_test_top.env_h.sbscr_h [eth_sbscr] Actual RXD = 36
+# UVM_INFO ./top/../config/../env/eth_scb.sv(39) @ 188: uvm_test_top.env_h.scb_h [eth_scb] Actual RXD = 36
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(50) @ 188: uvm_test_top.env_h.agnt_mac[1].mon_h [RX MONITOR] RXD = 36
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(51) @ 188: uvm_test_top.env_h.agnt_mac[1].mon_h [RX MONITOR] counter vaue = 2
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(25) @ 196: uvm_test_top.env_h.sbscr_h [eth_sbscr] Expected TXD = 90
+# UVM_INFO ./top/../config/../env/eth_scb.sv(34) @ 196: uvm_test_top.env_h.scb_h [eth_scb] Expected TXD = 90
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(43) @ 196: uvm_test_top.env_h.agnt_mac[0].mon_h [TX MONITOR] TXD = 90
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(29) @ 196: uvm_test_top.env_h.sbscr_h [eth_sbscr] Actual RXD = 0
+# UVM_INFO ./top/../config/../env/eth_scb.sv(39) @ 196: uvm_test_top.env_h.scb_h [eth_scb] Actual RXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(50) @ 196: uvm_test_top.env_h.agnt_mac[0].mon_h [RX MONITOR] RXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(51) @ 196: uvm_test_top.env_h.agnt_mac[0].mon_h [RX MONITOR] counter vaue = 2
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(25) @ 196: uvm_test_top.env_h.sbscr_h [eth_sbscr] Expected TXD = 0
+# UVM_INFO ./top/../config/../env/eth_scb.sv(34) @ 196: uvm_test_top.env_h.scb_h [eth_scb] Expected TXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(43) @ 196: uvm_test_top.env_h.agnt_mac[1].mon_h [TX MONITOR] TXD = 0
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(29) @ 196: uvm_test_top.env_h.sbscr_h [eth_sbscr] Actual RXD = 90
+# UVM_INFO ./top/../config/../env/eth_scb.sv(39) @ 196: uvm_test_top.env_h.scb_h [eth_scb] Actual RXD = 90
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(50) @ 196: uvm_test_top.env_h.agnt_mac[1].mon_h [RX MONITOR] RXD = 90
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(51) @ 196: uvm_test_top.env_h.agnt_mac[1].mon_h [RX MONITOR] counter vaue = 2
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(25) @ 204: uvm_test_top.env_h.sbscr_h [eth_sbscr] Expected TXD = a
+# UVM_INFO ./top/../config/../env/eth_scb.sv(34) @ 204: uvm_test_top.env_h.scb_h [eth_scb] Expected TXD = a
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(43) @ 204: uvm_test_top.env_h.agnt_mac[0].mon_h [TX MONITOR] TXD = a
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(29) @ 204: uvm_test_top.env_h.sbscr_h [eth_sbscr] Actual RXD = 0
+# UVM_INFO ./top/../config/../env/eth_scb.sv(39) @ 204: uvm_test_top.env_h.scb_h [eth_scb] Actual RXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(50) @ 204: uvm_test_top.env_h.agnt_mac[0].mon_h [RX MONITOR] RXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(51) @ 204: uvm_test_top.env_h.agnt_mac[0].mon_h [RX MONITOR] counter vaue = 2
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(25) @ 204: uvm_test_top.env_h.sbscr_h [eth_sbscr] Expected TXD = 0
+# UVM_INFO ./top/../config/../env/eth_scb.sv(34) @ 204: uvm_test_top.env_h.scb_h [eth_scb] Expected TXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(43) @ 204: uvm_test_top.env_h.agnt_mac[1].mon_h [TX MONITOR] TXD = 0
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(29) @ 204: uvm_test_top.env_h.sbscr_h [eth_sbscr] Actual RXD = a
+# UVM_INFO ./top/../config/../env/eth_scb.sv(39) @ 204: uvm_test_top.env_h.scb_h [eth_scb] Actual RXD = a
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(50) @ 204: uvm_test_top.env_h.agnt_mac[1].mon_h [RX MONITOR] RXD = a
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(51) @ 204: uvm_test_top.env_h.agnt_mac[1].mon_h [RX MONITOR] counter vaue = 2
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(25) @ 212: uvm_test_top.env_h.sbscr_h [eth_sbscr] Expected TXD = 78
+# UVM_INFO ./top/../config/../env/eth_scb.sv(34) @ 212: uvm_test_top.env_h.scb_h [eth_scb] Expected TXD = 78
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(43) @ 212: uvm_test_top.env_h.agnt_mac[0].mon_h [TX MONITOR] TXD = 78
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(29) @ 212: uvm_test_top.env_h.sbscr_h [eth_sbscr] Actual RXD = 0
+# UVM_INFO ./top/../config/../env/eth_scb.sv(39) @ 212: uvm_test_top.env_h.scb_h [eth_scb] Actual RXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(50) @ 212: uvm_test_top.env_h.agnt_mac[0].mon_h [RX MONITOR] RXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(51) @ 212: uvm_test_top.env_h.agnt_mac[0].mon_h [RX MONITOR] counter vaue = 2
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(25) @ 212: uvm_test_top.env_h.sbscr_h [eth_sbscr] Expected TXD = 0
+# UVM_INFO ./top/../config/../env/eth_scb.sv(34) @ 212: uvm_test_top.env_h.scb_h [eth_scb] Expected TXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(43) @ 212: uvm_test_top.env_h.agnt_mac[1].mon_h [TX MONITOR] TXD = 0
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(29) @ 212: uvm_test_top.env_h.sbscr_h [eth_sbscr] Actual RXD = 78
+# UVM_INFO ./top/../config/../env/eth_scb.sv(39) @ 212: uvm_test_top.env_h.scb_h [eth_scb] Actual RXD = 78
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(50) @ 212: uvm_test_top.env_h.agnt_mac[1].mon_h [RX MONITOR] RXD = 78
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(51) @ 212: uvm_test_top.env_h.agnt_mac[1].mon_h [RX MONITOR] counter vaue = 2
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(25) @ 220: uvm_test_top.env_h.sbscr_h [eth_sbscr] Expected TXD = 6b
+# UVM_INFO ./top/../config/../env/eth_scb.sv(34) @ 220: uvm_test_top.env_h.scb_h [eth_scb] Expected TXD = 6b
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(43) @ 220: uvm_test_top.env_h.agnt_mac[0].mon_h [TX MONITOR] TXD = 6b
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(29) @ 220: uvm_test_top.env_h.sbscr_h [eth_sbscr] Actual RXD = 0
+# UVM_INFO ./top/../config/../env/eth_scb.sv(39) @ 220: uvm_test_top.env_h.scb_h [eth_scb] Actual RXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(50) @ 220: uvm_test_top.env_h.agnt_mac[0].mon_h [RX MONITOR] RXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(51) @ 220: uvm_test_top.env_h.agnt_mac[0].mon_h [RX MONITOR] counter vaue = 2
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(25) @ 220: uvm_test_top.env_h.sbscr_h [eth_sbscr] Expected TXD = 0
+# UVM_INFO ./top/../config/../env/eth_scb.sv(34) @ 220: uvm_test_top.env_h.scb_h [eth_scb] Expected TXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(43) @ 220: uvm_test_top.env_h.agnt_mac[1].mon_h [TX MONITOR] TXD = 0
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(29) @ 220: uvm_test_top.env_h.sbscr_h [eth_sbscr] Actual RXD = 6b
+# UVM_INFO ./top/../config/../env/eth_scb.sv(39) @ 220: uvm_test_top.env_h.scb_h [eth_scb] Actual RXD = 6b
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(50) @ 220: uvm_test_top.env_h.agnt_mac[1].mon_h [RX MONITOR] RXD = 6b
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(51) @ 220: uvm_test_top.env_h.agnt_mac[1].mon_h [RX MONITOR] counter vaue = 2
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(25) @ 228: uvm_test_top.env_h.sbscr_h [eth_sbscr] Expected TXD = 6f
+# UVM_INFO ./top/../config/../env/eth_scb.sv(34) @ 228: uvm_test_top.env_h.scb_h [eth_scb] Expected TXD = 6f
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(43) @ 228: uvm_test_top.env_h.agnt_mac[0].mon_h [TX MONITOR] TXD = 6f
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(29) @ 228: uvm_test_top.env_h.sbscr_h [eth_sbscr] Actual RXD = 0
+# UVM_INFO ./top/../config/../env/eth_scb.sv(39) @ 228: uvm_test_top.env_h.scb_h [eth_scb] Actual RXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(50) @ 228: uvm_test_top.env_h.agnt_mac[0].mon_h [RX MONITOR] RXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(51) @ 228: uvm_test_top.env_h.agnt_mac[0].mon_h [RX MONITOR] counter vaue = 2
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(25) @ 228: uvm_test_top.env_h.sbscr_h [eth_sbscr] Expected TXD = 0
+# UVM_INFO ./top/../config/../env/eth_scb.sv(34) @ 228: uvm_test_top.env_h.scb_h [eth_scb] Expected TXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(43) @ 228: uvm_test_top.env_h.agnt_mac[1].mon_h [TX MONITOR] TXD = 0
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(29) @ 228: uvm_test_top.env_h.sbscr_h [eth_sbscr] Actual RXD = 6f
+# UVM_INFO ./top/../config/../env/eth_scb.sv(39) @ 228: uvm_test_top.env_h.scb_h [eth_scb] Actual RXD = 6f
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(50) @ 228: uvm_test_top.env_h.agnt_mac[1].mon_h [RX MONITOR] RXD = 6f
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(51) @ 228: uvm_test_top.env_h.agnt_mac[1].mon_h [RX MONITOR] counter vaue = 2
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(25) @ 236: uvm_test_top.env_h.sbscr_h [eth_sbscr] Expected TXD = d1
+# UVM_INFO ./top/../config/../env/eth_scb.sv(34) @ 236: uvm_test_top.env_h.scb_h [eth_scb] Expected TXD = d1
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(43) @ 236: uvm_test_top.env_h.agnt_mac[0].mon_h [TX MONITOR] TXD = d1
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(29) @ 236: uvm_test_top.env_h.sbscr_h [eth_sbscr] Actual RXD = 0
+# UVM_INFO ./top/../config/../env/eth_scb.sv(39) @ 236: uvm_test_top.env_h.scb_h [eth_scb] Actual RXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(50) @ 236: uvm_test_top.env_h.agnt_mac[0].mon_h [RX MONITOR] RXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(51) @ 236: uvm_test_top.env_h.agnt_mac[0].mon_h [RX MONITOR] counter vaue = 2
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(25) @ 236: uvm_test_top.env_h.sbscr_h [eth_sbscr] Expected TXD = 0
+# UVM_INFO ./top/../config/../env/eth_scb.sv(34) @ 236: uvm_test_top.env_h.scb_h [eth_scb] Expected TXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(43) @ 236: uvm_test_top.env_h.agnt_mac[1].mon_h [TX MONITOR] TXD = 0
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(29) @ 236: uvm_test_top.env_h.sbscr_h [eth_sbscr] Actual RXD = d1
+# UVM_INFO ./top/../config/../env/eth_scb.sv(39) @ 236: uvm_test_top.env_h.scb_h [eth_scb] Actual RXD = d1
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(50) @ 236: uvm_test_top.env_h.agnt_mac[1].mon_h [RX MONITOR] RXD = d1
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(51) @ 236: uvm_test_top.env_h.agnt_mac[1].mon_h [RX MONITOR] counter vaue = 2
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(25) @ 244: uvm_test_top.env_h.sbscr_h [eth_sbscr] Expected TXD = 79
+# UVM_INFO ./top/../config/../env/eth_scb.sv(34) @ 244: uvm_test_top.env_h.scb_h [eth_scb] Expected TXD = 79
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(43) @ 244: uvm_test_top.env_h.agnt_mac[0].mon_h [TX MONITOR] TXD = 79
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(29) @ 244: uvm_test_top.env_h.sbscr_h [eth_sbscr] Actual RXD = 0
+# UVM_INFO ./top/../config/../env/eth_scb.sv(39) @ 244: uvm_test_top.env_h.scb_h [eth_scb] Actual RXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(50) @ 244: uvm_test_top.env_h.agnt_mac[0].mon_h [RX MONITOR] RXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(51) @ 244: uvm_test_top.env_h.agnt_mac[0].mon_h [RX MONITOR] counter vaue = 2
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(25) @ 244: uvm_test_top.env_h.sbscr_h [eth_sbscr] Expected TXD = 0
+# UVM_INFO ./top/../config/../env/eth_scb.sv(34) @ 244: uvm_test_top.env_h.scb_h [eth_scb] Expected TXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(43) @ 244: uvm_test_top.env_h.agnt_mac[1].mon_h [TX MONITOR] TXD = 0
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(29) @ 244: uvm_test_top.env_h.sbscr_h [eth_sbscr] Actual RXD = 79
+# UVM_INFO ./top/../config/../env/eth_scb.sv(39) @ 244: uvm_test_top.env_h.scb_h [eth_scb] Actual RXD = 79
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(50) @ 244: uvm_test_top.env_h.agnt_mac[1].mon_h [RX MONITOR] RXD = 79
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(51) @ 244: uvm_test_top.env_h.agnt_mac[1].mon_h [RX MONITOR] counter vaue = 2
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(25) @ 252: uvm_test_top.env_h.sbscr_h [eth_sbscr] Expected TXD = 9
+# UVM_INFO ./top/../config/../env/eth_scb.sv(34) @ 252: uvm_test_top.env_h.scb_h [eth_scb] Expected TXD = 9
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(43) @ 252: uvm_test_top.env_h.agnt_mac[0].mon_h [TX MONITOR] TXD = 9
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(29) @ 252: uvm_test_top.env_h.sbscr_h [eth_sbscr] Actual RXD = 0
+# UVM_INFO ./top/../config/../env/eth_scb.sv(39) @ 252: uvm_test_top.env_h.scb_h [eth_scb] Actual RXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(50) @ 252: uvm_test_top.env_h.agnt_mac[0].mon_h [RX MONITOR] RXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(51) @ 252: uvm_test_top.env_h.agnt_mac[0].mon_h [RX MONITOR] counter vaue = 2
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(25) @ 252: uvm_test_top.env_h.sbscr_h [eth_sbscr] Expected TXD = 0
+# UVM_INFO ./top/../config/../env/eth_scb.sv(34) @ 252: uvm_test_top.env_h.scb_h [eth_scb] Expected TXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(43) @ 252: uvm_test_top.env_h.agnt_mac[1].mon_h [TX MONITOR] TXD = 0
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(29) @ 252: uvm_test_top.env_h.sbscr_h [eth_sbscr] Actual RXD = 9
+# UVM_INFO ./top/../config/../env/eth_scb.sv(39) @ 252: uvm_test_top.env_h.scb_h [eth_scb] Actual RXD = 9
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(50) @ 252: uvm_test_top.env_h.agnt_mac[1].mon_h [RX MONITOR] RXD = 9
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(51) @ 252: uvm_test_top.env_h.agnt_mac[1].mon_h [RX MONITOR] counter vaue = 2
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(25) @ 260: uvm_test_top.env_h.sbscr_h [eth_sbscr] Expected TXD = 80
+# UVM_INFO ./top/../config/../env/eth_scb.sv(34) @ 260: uvm_test_top.env_h.scb_h [eth_scb] Expected TXD = 80
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(43) @ 260: uvm_test_top.env_h.agnt_mac[0].mon_h [TX MONITOR] TXD = 80
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(29) @ 260: uvm_test_top.env_h.sbscr_h [eth_sbscr] Actual RXD = 0
+# UVM_INFO ./top/../config/../env/eth_scb.sv(39) @ 260: uvm_test_top.env_h.scb_h [eth_scb] Actual RXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(50) @ 260: uvm_test_top.env_h.agnt_mac[0].mon_h [RX MONITOR] RXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(51) @ 260: uvm_test_top.env_h.agnt_mac[0].mon_h [RX MONITOR] counter vaue = 2
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(25) @ 260: uvm_test_top.env_h.sbscr_h [eth_sbscr] Expected TXD = 0
+# UVM_INFO ./top/../config/../env/eth_scb.sv(34) @ 260: uvm_test_top.env_h.scb_h [eth_scb] Expected TXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(43) @ 260: uvm_test_top.env_h.agnt_mac[1].mon_h [TX MONITOR] TXD = 0
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(29) @ 260: uvm_test_top.env_h.sbscr_h [eth_sbscr] Actual RXD = 80
+# UVM_INFO ./top/../config/../env/eth_scb.sv(39) @ 260: uvm_test_top.env_h.scb_h [eth_scb] Actual RXD = 80
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(50) @ 260: uvm_test_top.env_h.agnt_mac[1].mon_h [RX MONITOR] RXD = 80
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(51) @ 260: uvm_test_top.env_h.agnt_mac[1].mon_h [RX MONITOR] counter vaue = 2
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(25) @ 268: uvm_test_top.env_h.sbscr_h [eth_sbscr] Expected TXD = 2f
+# UVM_INFO ./top/../config/../env/eth_scb.sv(34) @ 268: uvm_test_top.env_h.scb_h [eth_scb] Expected TXD = 2f
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(43) @ 268: uvm_test_top.env_h.agnt_mac[0].mon_h [TX MONITOR] TXD = 2f
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(29) @ 268: uvm_test_top.env_h.sbscr_h [eth_sbscr] Actual RXD = 0
+# UVM_INFO ./top/../config/../env/eth_scb.sv(39) @ 268: uvm_test_top.env_h.scb_h [eth_scb] Actual RXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(50) @ 268: uvm_test_top.env_h.agnt_mac[0].mon_h [RX MONITOR] RXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(51) @ 268: uvm_test_top.env_h.agnt_mac[0].mon_h [RX MONITOR] counter vaue = 2
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(25) @ 268: uvm_test_top.env_h.sbscr_h [eth_sbscr] Expected TXD = 0
+# UVM_INFO ./top/../config/../env/eth_scb.sv(34) @ 268: uvm_test_top.env_h.scb_h [eth_scb] Expected TXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(43) @ 268: uvm_test_top.env_h.agnt_mac[1].mon_h [TX MONITOR] TXD = 0
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(29) @ 268: uvm_test_top.env_h.sbscr_h [eth_sbscr] Actual RXD = 2f
+# UVM_INFO ./top/../config/../env/eth_scb.sv(39) @ 268: uvm_test_top.env_h.scb_h [eth_scb] Actual RXD = 2f
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(50) @ 268: uvm_test_top.env_h.agnt_mac[1].mon_h [RX MONITOR] RXD = 2f
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(51) @ 268: uvm_test_top.env_h.agnt_mac[1].mon_h [RX MONITOR] counter vaue = 2
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(25) @ 276: uvm_test_top.env_h.sbscr_h [eth_sbscr] Expected TXD = 93
+# UVM_INFO ./top/../config/../env/eth_scb.sv(34) @ 276: uvm_test_top.env_h.scb_h [eth_scb] Expected TXD = 93
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(43) @ 276: uvm_test_top.env_h.agnt_mac[0].mon_h [TX MONITOR] TXD = 93
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(29) @ 276: uvm_test_top.env_h.sbscr_h [eth_sbscr] Actual RXD = 0
+# UVM_INFO ./top/../config/../env/eth_scb.sv(39) @ 276: uvm_test_top.env_h.scb_h [eth_scb] Actual RXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(50) @ 276: uvm_test_top.env_h.agnt_mac[0].mon_h [RX MONITOR] RXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(51) @ 276: uvm_test_top.env_h.agnt_mac[0].mon_h [RX MONITOR] counter vaue = 2
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(25) @ 276: uvm_test_top.env_h.sbscr_h [eth_sbscr] Expected TXD = 0
+# UVM_INFO ./top/../config/../env/eth_scb.sv(34) @ 276: uvm_test_top.env_h.scb_h [eth_scb] Expected TXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(43) @ 276: uvm_test_top.env_h.agnt_mac[1].mon_h [TX MONITOR] TXD = 0
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(29) @ 276: uvm_test_top.env_h.sbscr_h [eth_sbscr] Actual RXD = 93
+# UVM_INFO ./top/../config/../env/eth_scb.sv(39) @ 276: uvm_test_top.env_h.scb_h [eth_scb] Actual RXD = 93
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(50) @ 276: uvm_test_top.env_h.agnt_mac[1].mon_h [RX MONITOR] RXD = 93
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(51) @ 276: uvm_test_top.env_h.agnt_mac[1].mon_h [RX MONITOR] counter vaue = 2
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(25) @ 284: uvm_test_top.env_h.sbscr_h [eth_sbscr] Expected TXD = e1
+# UVM_INFO ./top/../config/../env/eth_scb.sv(34) @ 284: uvm_test_top.env_h.scb_h [eth_scb] Expected TXD = e1
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(43) @ 284: uvm_test_top.env_h.agnt_mac[0].mon_h [TX MONITOR] TXD = e1
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(29) @ 284: uvm_test_top.env_h.sbscr_h [eth_sbscr] Actual RXD = 0
+# UVM_INFO ./top/../config/../env/eth_scb.sv(39) @ 284: uvm_test_top.env_h.scb_h [eth_scb] Actual RXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(50) @ 284: uvm_test_top.env_h.agnt_mac[0].mon_h [RX MONITOR] RXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(51) @ 284: uvm_test_top.env_h.agnt_mac[0].mon_h [RX MONITOR] counter vaue = 2
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(25) @ 284: uvm_test_top.env_h.sbscr_h [eth_sbscr] Expected TXD = 0
+# UVM_INFO ./top/../config/../env/eth_scb.sv(34) @ 284: uvm_test_top.env_h.scb_h [eth_scb] Expected TXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(43) @ 284: uvm_test_top.env_h.agnt_mac[1].mon_h [TX MONITOR] TXD = 0
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(29) @ 284: uvm_test_top.env_h.sbscr_h [eth_sbscr] Actual RXD = e1
+# UVM_INFO ./top/../config/../env/eth_scb.sv(39) @ 284: uvm_test_top.env_h.scb_h [eth_scb] Actual RXD = e1
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(50) @ 284: uvm_test_top.env_h.agnt_mac[1].mon_h [RX MONITOR] RXD = e1
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(51) @ 284: uvm_test_top.env_h.agnt_mac[1].mon_h [RX MONITOR] counter vaue = 2
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(25) @ 292: uvm_test_top.env_h.sbscr_h [eth_sbscr] Expected TXD = 10
+# UVM_INFO ./top/../config/../env/eth_scb.sv(34) @ 292: uvm_test_top.env_h.scb_h [eth_scb] Expected TXD = 10
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(43) @ 292: uvm_test_top.env_h.agnt_mac[0].mon_h [TX MONITOR] TXD = 10
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(29) @ 292: uvm_test_top.env_h.sbscr_h [eth_sbscr] Actual RXD = 0
+# UVM_INFO ./top/../config/../env/eth_scb.sv(39) @ 292: uvm_test_top.env_h.scb_h [eth_scb] Actual RXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(50) @ 292: uvm_test_top.env_h.agnt_mac[0].mon_h [RX MONITOR] RXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(51) @ 292: uvm_test_top.env_h.agnt_mac[0].mon_h [RX MONITOR] counter vaue = 2
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(25) @ 292: uvm_test_top.env_h.sbscr_h [eth_sbscr] Expected TXD = 0
+# UVM_INFO ./top/../config/../env/eth_scb.sv(34) @ 292: uvm_test_top.env_h.scb_h [eth_scb] Expected TXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(43) @ 292: uvm_test_top.env_h.agnt_mac[1].mon_h [TX MONITOR] TXD = 0
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(29) @ 292: uvm_test_top.env_h.sbscr_h [eth_sbscr] Actual RXD = 10
+# UVM_INFO ./top/../config/../env/eth_scb.sv(39) @ 292: uvm_test_top.env_h.scb_h [eth_scb] Actual RXD = 10
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(50) @ 292: uvm_test_top.env_h.agnt_mac[1].mon_h [RX MONITOR] RXD = 10
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(51) @ 292: uvm_test_top.env_h.agnt_mac[1].mon_h [RX MONITOR] counter vaue = 2
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(25) @ 300: uvm_test_top.env_h.sbscr_h [eth_sbscr] Expected TXD = 83
+# UVM_INFO ./top/../config/../env/eth_scb.sv(34) @ 300: uvm_test_top.env_h.scb_h [eth_scb] Expected TXD = 83
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(43) @ 300: uvm_test_top.env_h.agnt_mac[0].mon_h [TX MONITOR] TXD = 83
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(29) @ 300: uvm_test_top.env_h.sbscr_h [eth_sbscr] Actual RXD = 0
+# UVM_INFO ./top/../config/../env/eth_scb.sv(39) @ 300: uvm_test_top.env_h.scb_h [eth_scb] Actual RXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(50) @ 300: uvm_test_top.env_h.agnt_mac[0].mon_h [RX MONITOR] RXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(51) @ 300: uvm_test_top.env_h.agnt_mac[0].mon_h [RX MONITOR] counter vaue = 2
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(25) @ 300: uvm_test_top.env_h.sbscr_h [eth_sbscr] Expected TXD = 0
+# UVM_INFO ./top/../config/../env/eth_scb.sv(34) @ 300: uvm_test_top.env_h.scb_h [eth_scb] Expected TXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(43) @ 300: uvm_test_top.env_h.agnt_mac[1].mon_h [TX MONITOR] TXD = 0
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(29) @ 300: uvm_test_top.env_h.sbscr_h [eth_sbscr] Actual RXD = 83
+# UVM_INFO ./top/../config/../env/eth_scb.sv(39) @ 300: uvm_test_top.env_h.scb_h [eth_scb] Actual RXD = 83
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(50) @ 300: uvm_test_top.env_h.agnt_mac[1].mon_h [RX MONITOR] RXD = 83
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(51) @ 300: uvm_test_top.env_h.agnt_mac[1].mon_h [RX MONITOR] counter vaue = 2
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(25) @ 308: uvm_test_top.env_h.sbscr_h [eth_sbscr] Expected TXD = ee
+# UVM_INFO ./top/../config/../env/eth_scb.sv(34) @ 308: uvm_test_top.env_h.scb_h [eth_scb] Expected TXD = ee
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(43) @ 308: uvm_test_top.env_h.agnt_mac[0].mon_h [TX MONITOR] TXD = ee
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(29) @ 308: uvm_test_top.env_h.sbscr_h [eth_sbscr] Actual RXD = 0
+# UVM_INFO ./top/../config/../env/eth_scb.sv(39) @ 308: uvm_test_top.env_h.scb_h [eth_scb] Actual RXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(50) @ 308: uvm_test_top.env_h.agnt_mac[0].mon_h [RX MONITOR] RXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(51) @ 308: uvm_test_top.env_h.agnt_mac[0].mon_h [RX MONITOR] counter vaue = 2
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(25) @ 308: uvm_test_top.env_h.sbscr_h [eth_sbscr] Expected TXD = 0
+# UVM_INFO ./top/../config/../env/eth_scb.sv(34) @ 308: uvm_test_top.env_h.scb_h [eth_scb] Expected TXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(43) @ 308: uvm_test_top.env_h.agnt_mac[1].mon_h [TX MONITOR] TXD = 0
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(29) @ 308: uvm_test_top.env_h.sbscr_h [eth_sbscr] Actual RXD = ee
+# UVM_INFO ./top/../config/../env/eth_scb.sv(39) @ 308: uvm_test_top.env_h.scb_h [eth_scb] Actual RXD = ee
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(50) @ 308: uvm_test_top.env_h.agnt_mac[1].mon_h [RX MONITOR] RXD = ee
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(51) @ 308: uvm_test_top.env_h.agnt_mac[1].mon_h [RX MONITOR] counter vaue = 2
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(25) @ 316: uvm_test_top.env_h.sbscr_h [eth_sbscr] Expected TXD = b
+# UVM_INFO ./top/../config/../env/eth_scb.sv(34) @ 316: uvm_test_top.env_h.scb_h [eth_scb] Expected TXD = b
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(43) @ 316: uvm_test_top.env_h.agnt_mac[0].mon_h [TX MONITOR] TXD = b
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(29) @ 316: uvm_test_top.env_h.sbscr_h [eth_sbscr] Actual RXD = 0
+# UVM_INFO ./top/../config/../env/eth_scb.sv(39) @ 316: uvm_test_top.env_h.scb_h [eth_scb] Actual RXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(50) @ 316: uvm_test_top.env_h.agnt_mac[0].mon_h [RX MONITOR] RXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(51) @ 316: uvm_test_top.env_h.agnt_mac[0].mon_h [RX MONITOR] counter vaue = 2
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(25) @ 316: uvm_test_top.env_h.sbscr_h [eth_sbscr] Expected TXD = 0
+# UVM_INFO ./top/../config/../env/eth_scb.sv(34) @ 316: uvm_test_top.env_h.scb_h [eth_scb] Expected TXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(43) @ 316: uvm_test_top.env_h.agnt_mac[1].mon_h [TX MONITOR] TXD = 0
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(29) @ 316: uvm_test_top.env_h.sbscr_h [eth_sbscr] Actual RXD = b
+# UVM_INFO ./top/../config/../env/eth_scb.sv(39) @ 316: uvm_test_top.env_h.scb_h [eth_scb] Actual RXD = b
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(50) @ 316: uvm_test_top.env_h.agnt_mac[1].mon_h [RX MONITOR] RXD = b
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(51) @ 316: uvm_test_top.env_h.agnt_mac[1].mon_h [RX MONITOR] counter vaue = 2
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(25) @ 324: uvm_test_top.env_h.sbscr_h [eth_sbscr] Expected TXD = 3c
+# UVM_INFO ./top/../config/../env/eth_scb.sv(34) @ 324: uvm_test_top.env_h.scb_h [eth_scb] Expected TXD = 3c
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(43) @ 324: uvm_test_top.env_h.agnt_mac[0].mon_h [TX MONITOR] TXD = 3c
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(29) @ 324: uvm_test_top.env_h.sbscr_h [eth_sbscr] Actual RXD = 0
+# UVM_INFO ./top/../config/../env/eth_scb.sv(39) @ 324: uvm_test_top.env_h.scb_h [eth_scb] Actual RXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(50) @ 324: uvm_test_top.env_h.agnt_mac[0].mon_h [RX MONITOR] RXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(51) @ 324: uvm_test_top.env_h.agnt_mac[0].mon_h [RX MONITOR] counter vaue = 2
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(25) @ 324: uvm_test_top.env_h.sbscr_h [eth_sbscr] Expected TXD = 0
+# UVM_INFO ./top/../config/../env/eth_scb.sv(34) @ 324: uvm_test_top.env_h.scb_h [eth_scb] Expected TXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(43) @ 324: uvm_test_top.env_h.agnt_mac[1].mon_h [TX MONITOR] TXD = 0
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(29) @ 324: uvm_test_top.env_h.sbscr_h [eth_sbscr] Actual RXD = 3c
+# UVM_INFO ./top/../config/../env/eth_scb.sv(39) @ 324: uvm_test_top.env_h.scb_h [eth_scb] Actual RXD = 3c
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(50) @ 324: uvm_test_top.env_h.agnt_mac[1].mon_h [RX MONITOR] RXD = 3c
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(51) @ 324: uvm_test_top.env_h.agnt_mac[1].mon_h [RX MONITOR] counter vaue = 2
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(25) @ 332: uvm_test_top.env_h.sbscr_h [eth_sbscr] Expected TXD = a4
+# UVM_INFO ./top/../config/../env/eth_scb.sv(34) @ 332: uvm_test_top.env_h.scb_h [eth_scb] Expected TXD = a4
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(43) @ 332: uvm_test_top.env_h.agnt_mac[0].mon_h [TX MONITOR] TXD = a4
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(29) @ 332: uvm_test_top.env_h.sbscr_h [eth_sbscr] Actual RXD = 0
+# UVM_INFO ./top/../config/../env/eth_scb.sv(39) @ 332: uvm_test_top.env_h.scb_h [eth_scb] Actual RXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(50) @ 332: uvm_test_top.env_h.agnt_mac[0].mon_h [RX MONITOR] RXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(51) @ 332: uvm_test_top.env_h.agnt_mac[0].mon_h [RX MONITOR] counter vaue = 2
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(25) @ 332: uvm_test_top.env_h.sbscr_h [eth_sbscr] Expected TXD = 0
+# UVM_INFO ./top/../config/../env/eth_scb.sv(34) @ 332: uvm_test_top.env_h.scb_h [eth_scb] Expected TXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(43) @ 332: uvm_test_top.env_h.agnt_mac[1].mon_h [TX MONITOR] TXD = 0
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(29) @ 332: uvm_test_top.env_h.sbscr_h [eth_sbscr] Actual RXD = a4
+# UVM_INFO ./top/../config/../env/eth_scb.sv(39) @ 332: uvm_test_top.env_h.scb_h [eth_scb] Actual RXD = a4
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(50) @ 332: uvm_test_top.env_h.agnt_mac[1].mon_h [RX MONITOR] RXD = a4
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(51) @ 332: uvm_test_top.env_h.agnt_mac[1].mon_h [RX MONITOR] counter vaue = 2
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(25) @ 340: uvm_test_top.env_h.sbscr_h [eth_sbscr] Expected TXD = 67
+# UVM_INFO ./top/../config/../env/eth_scb.sv(34) @ 340: uvm_test_top.env_h.scb_h [eth_scb] Expected TXD = 67
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(43) @ 340: uvm_test_top.env_h.agnt_mac[0].mon_h [TX MONITOR] TXD = 67
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(29) @ 340: uvm_test_top.env_h.sbscr_h [eth_sbscr] Actual RXD = 0
+# UVM_INFO ./top/../config/../env/eth_scb.sv(39) @ 340: uvm_test_top.env_h.scb_h [eth_scb] Actual RXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(50) @ 340: uvm_test_top.env_h.agnt_mac[0].mon_h [RX MONITOR] RXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(51) @ 340: uvm_test_top.env_h.agnt_mac[0].mon_h [RX MONITOR] counter vaue = 2
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(25) @ 340: uvm_test_top.env_h.sbscr_h [eth_sbscr] Expected TXD = 0
+# UVM_INFO ./top/../config/../env/eth_scb.sv(34) @ 340: uvm_test_top.env_h.scb_h [eth_scb] Expected TXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(43) @ 340: uvm_test_top.env_h.agnt_mac[1].mon_h [TX MONITOR] TXD = 0
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(29) @ 340: uvm_test_top.env_h.sbscr_h [eth_sbscr] Actual RXD = 67
+# UVM_INFO ./top/../config/../env/eth_scb.sv(39) @ 340: uvm_test_top.env_h.scb_h [eth_scb] Actual RXD = 67
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(50) @ 340: uvm_test_top.env_h.agnt_mac[1].mon_h [RX MONITOR] RXD = 67
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(51) @ 340: uvm_test_top.env_h.agnt_mac[1].mon_h [RX MONITOR] counter vaue = 2
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(25) @ 348: uvm_test_top.env_h.sbscr_h [eth_sbscr] Expected TXD = 9f
+# UVM_INFO ./top/../config/../env/eth_scb.sv(34) @ 348: uvm_test_top.env_h.scb_h [eth_scb] Expected TXD = 9f
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(43) @ 348: uvm_test_top.env_h.agnt_mac[0].mon_h [TX MONITOR] TXD = 9f
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(29) @ 348: uvm_test_top.env_h.sbscr_h [eth_sbscr] Actual RXD = 0
+# UVM_INFO ./top/../config/../env/eth_scb.sv(39) @ 348: uvm_test_top.env_h.scb_h [eth_scb] Actual RXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(50) @ 348: uvm_test_top.env_h.agnt_mac[0].mon_h [RX MONITOR] RXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(51) @ 348: uvm_test_top.env_h.agnt_mac[0].mon_h [RX MONITOR] counter vaue = 2
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(25) @ 348: uvm_test_top.env_h.sbscr_h [eth_sbscr] Expected TXD = 0
+# UVM_INFO ./top/../config/../env/eth_scb.sv(34) @ 348: uvm_test_top.env_h.scb_h [eth_scb] Expected TXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(43) @ 348: uvm_test_top.env_h.agnt_mac[1].mon_h [TX MONITOR] TXD = 0
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(29) @ 348: uvm_test_top.env_h.sbscr_h [eth_sbscr] Actual RXD = 9f
+# UVM_INFO ./top/../config/../env/eth_scb.sv(39) @ 348: uvm_test_top.env_h.scb_h [eth_scb] Actual RXD = 9f
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(50) @ 348: uvm_test_top.env_h.agnt_mac[1].mon_h [RX MONITOR] RXD = 9f
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(51) @ 348: uvm_test_top.env_h.agnt_mac[1].mon_h [RX MONITOR] counter vaue = 2
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(25) @ 356: uvm_test_top.env_h.sbscr_h [eth_sbscr] Expected TXD = 52
+# UVM_INFO ./top/../config/../env/eth_scb.sv(34) @ 356: uvm_test_top.env_h.scb_h [eth_scb] Expected TXD = 52
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(43) @ 356: uvm_test_top.env_h.agnt_mac[0].mon_h [TX MONITOR] TXD = 52
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(29) @ 356: uvm_test_top.env_h.sbscr_h [eth_sbscr] Actual RXD = 0
+# UVM_INFO ./top/../config/../env/eth_scb.sv(39) @ 356: uvm_test_top.env_h.scb_h [eth_scb] Actual RXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(50) @ 356: uvm_test_top.env_h.agnt_mac[0].mon_h [RX MONITOR] RXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(51) @ 356: uvm_test_top.env_h.agnt_mac[0].mon_h [RX MONITOR] counter vaue = 2
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(25) @ 356: uvm_test_top.env_h.sbscr_h [eth_sbscr] Expected TXD = 0
+# UVM_INFO ./top/../config/../env/eth_scb.sv(34) @ 356: uvm_test_top.env_h.scb_h [eth_scb] Expected TXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(43) @ 356: uvm_test_top.env_h.agnt_mac[1].mon_h [TX MONITOR] TXD = 0
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(29) @ 356: uvm_test_top.env_h.sbscr_h [eth_sbscr] Actual RXD = 52
+# UVM_INFO ./top/../config/../env/eth_scb.sv(39) @ 356: uvm_test_top.env_h.scb_h [eth_scb] Actual RXD = 52
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(50) @ 356: uvm_test_top.env_h.agnt_mac[1].mon_h [RX MONITOR] RXD = 52
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(51) @ 356: uvm_test_top.env_h.agnt_mac[1].mon_h [RX MONITOR] counter vaue = 2
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(25) @ 364: uvm_test_top.env_h.sbscr_h [eth_sbscr] Expected TXD = 55
+# UVM_INFO ./top/../config/../env/eth_scb.sv(34) @ 364: uvm_test_top.env_h.scb_h [eth_scb] Expected TXD = 55
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(43) @ 364: uvm_test_top.env_h.agnt_mac[0].mon_h [TX MONITOR] TXD = 55
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(29) @ 364: uvm_test_top.env_h.sbscr_h [eth_sbscr] Actual RXD = 0
+# UVM_INFO ./top/../config/../env/eth_scb.sv(39) @ 364: uvm_test_top.env_h.scb_h [eth_scb] Actual RXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(50) @ 364: uvm_test_top.env_h.agnt_mac[0].mon_h [RX MONITOR] RXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(51) @ 364: uvm_test_top.env_h.agnt_mac[0].mon_h [RX MONITOR] counter vaue = 2
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(25) @ 364: uvm_test_top.env_h.sbscr_h [eth_sbscr] Expected TXD = 0
+# UVM_INFO ./top/../config/../env/eth_scb.sv(34) @ 364: uvm_test_top.env_h.scb_h [eth_scb] Expected TXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(43) @ 364: uvm_test_top.env_h.agnt_mac[1].mon_h [TX MONITOR] TXD = 0
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(29) @ 364: uvm_test_top.env_h.sbscr_h [eth_sbscr] Actual RXD = 55
+# UVM_INFO ./top/../config/../env/eth_scb.sv(39) @ 364: uvm_test_top.env_h.scb_h [eth_scb] Actual RXD = 55
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(50) @ 364: uvm_test_top.env_h.agnt_mac[1].mon_h [RX MONITOR] RXD = 55
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(51) @ 364: uvm_test_top.env_h.agnt_mac[1].mon_h [RX MONITOR] counter vaue = 2
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(25) @ 372: uvm_test_top.env_h.sbscr_h [eth_sbscr] Expected TXD = 12
+# UVM_INFO ./top/../config/../env/eth_scb.sv(34) @ 372: uvm_test_top.env_h.scb_h [eth_scb] Expected TXD = 12
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(43) @ 372: uvm_test_top.env_h.agnt_mac[0].mon_h [TX MONITOR] TXD = 12
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(29) @ 372: uvm_test_top.env_h.sbscr_h [eth_sbscr] Actual RXD = 0
+# UVM_INFO ./top/../config/../env/eth_scb.sv(39) @ 372: uvm_test_top.env_h.scb_h [eth_scb] Actual RXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(50) @ 372: uvm_test_top.env_h.agnt_mac[0].mon_h [RX MONITOR] RXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(51) @ 372: uvm_test_top.env_h.agnt_mac[0].mon_h [RX MONITOR] counter vaue = 2
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(25) @ 372: uvm_test_top.env_h.sbscr_h [eth_sbscr] Expected TXD = 0
+# UVM_INFO ./top/../config/../env/eth_scb.sv(34) @ 372: uvm_test_top.env_h.scb_h [eth_scb] Expected TXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(43) @ 372: uvm_test_top.env_h.agnt_mac[1].mon_h [TX MONITOR] TXD = 0
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(29) @ 372: uvm_test_top.env_h.sbscr_h [eth_sbscr] Actual RXD = 12
+# UVM_INFO ./top/../config/../env/eth_scb.sv(39) @ 372: uvm_test_top.env_h.scb_h [eth_scb] Actual RXD = 12
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(50) @ 372: uvm_test_top.env_h.agnt_mac[1].mon_h [RX MONITOR] RXD = 12
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(51) @ 372: uvm_test_top.env_h.agnt_mac[1].mon_h [RX MONITOR] counter vaue = 2
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(25) @ 380: uvm_test_top.env_h.sbscr_h [eth_sbscr] Expected TXD = 4
+# UVM_INFO ./top/../config/../env/eth_scb.sv(34) @ 380: uvm_test_top.env_h.scb_h [eth_scb] Expected TXD = 4
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(43) @ 380: uvm_test_top.env_h.agnt_mac[0].mon_h [TX MONITOR] TXD = 4
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(29) @ 380: uvm_test_top.env_h.sbscr_h [eth_sbscr] Actual RXD = 0
+# UVM_INFO ./top/../config/../env/eth_scb.sv(39) @ 380: uvm_test_top.env_h.scb_h [eth_scb] Actual RXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(50) @ 380: uvm_test_top.env_h.agnt_mac[0].mon_h [RX MONITOR] RXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(51) @ 380: uvm_test_top.env_h.agnt_mac[0].mon_h [RX MONITOR] counter vaue = 2
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(25) @ 380: uvm_test_top.env_h.sbscr_h [eth_sbscr] Expected TXD = 0
+# UVM_INFO ./top/../config/../env/eth_scb.sv(34) @ 380: uvm_test_top.env_h.scb_h [eth_scb] Expected TXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(43) @ 380: uvm_test_top.env_h.agnt_mac[1].mon_h [TX MONITOR] TXD = 0
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(29) @ 380: uvm_test_top.env_h.sbscr_h [eth_sbscr] Actual RXD = 4
+# UVM_INFO ./top/../config/../env/eth_scb.sv(39) @ 380: uvm_test_top.env_h.scb_h [eth_scb] Actual RXD = 4
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(50) @ 380: uvm_test_top.env_h.agnt_mac[1].mon_h [RX MONITOR] RXD = 4
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(51) @ 380: uvm_test_top.env_h.agnt_mac[1].mon_h [RX MONITOR] counter vaue = 2
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(25) @ 388: uvm_test_top.env_h.sbscr_h [eth_sbscr] Expected TXD = 60
+# UVM_INFO ./top/../config/../env/eth_scb.sv(34) @ 388: uvm_test_top.env_h.scb_h [eth_scb] Expected TXD = 60
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(43) @ 388: uvm_test_top.env_h.agnt_mac[0].mon_h [TX MONITOR] TXD = 60
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(29) @ 388: uvm_test_top.env_h.sbscr_h [eth_sbscr] Actual RXD = 0
+# UVM_INFO ./top/../config/../env/eth_scb.sv(39) @ 388: uvm_test_top.env_h.scb_h [eth_scb] Actual RXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(50) @ 388: uvm_test_top.env_h.agnt_mac[0].mon_h [RX MONITOR] RXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(51) @ 388: uvm_test_top.env_h.agnt_mac[0].mon_h [RX MONITOR] counter vaue = 2
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(25) @ 388: uvm_test_top.env_h.sbscr_h [eth_sbscr] Expected TXD = 0
+# UVM_INFO ./top/../config/../env/eth_scb.sv(34) @ 388: uvm_test_top.env_h.scb_h [eth_scb] Expected TXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(43) @ 388: uvm_test_top.env_h.agnt_mac[1].mon_h [TX MONITOR] TXD = 0
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(29) @ 388: uvm_test_top.env_h.sbscr_h [eth_sbscr] Actual RXD = 60
+# UVM_INFO ./top/../config/../env/eth_scb.sv(39) @ 388: uvm_test_top.env_h.scb_h [eth_scb] Actual RXD = 60
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(50) @ 388: uvm_test_top.env_h.agnt_mac[1].mon_h [RX MONITOR] RXD = 60
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(51) @ 388: uvm_test_top.env_h.agnt_mac[1].mon_h [RX MONITOR] counter vaue = 2
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(25) @ 396: uvm_test_top.env_h.sbscr_h [eth_sbscr] Expected TXD = 8f
+# UVM_INFO ./top/../config/../env/eth_scb.sv(34) @ 396: uvm_test_top.env_h.scb_h [eth_scb] Expected TXD = 8f
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(43) @ 396: uvm_test_top.env_h.agnt_mac[0].mon_h [TX MONITOR] TXD = 8f
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(29) @ 396: uvm_test_top.env_h.sbscr_h [eth_sbscr] Actual RXD = 0
+# UVM_INFO ./top/../config/../env/eth_scb.sv(39) @ 396: uvm_test_top.env_h.scb_h [eth_scb] Actual RXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(50) @ 396: uvm_test_top.env_h.agnt_mac[0].mon_h [RX MONITOR] RXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(51) @ 396: uvm_test_top.env_h.agnt_mac[0].mon_h [RX MONITOR] counter vaue = 2
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(25) @ 396: uvm_test_top.env_h.sbscr_h [eth_sbscr] Expected TXD = 0
+# UVM_INFO ./top/../config/../env/eth_scb.sv(34) @ 396: uvm_test_top.env_h.scb_h [eth_scb] Expected TXD = 0
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(43) @ 396: uvm_test_top.env_h.agnt_mac[1].mon_h [TX MONITOR] TXD = 0
+# UVM_INFO ./top/../config/../env/eth_sbscr.sv(29) @ 396: uvm_test_top.env_h.sbscr_h [eth_sbscr] Actual RXD = 8f
+# UVM_INFO ./top/../config/../env/eth_scb.sv(39) @ 396: uvm_test_top.env_h.scb_h [eth_scb] Actual RXD = 8f
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(50) @ 396: uvm_test_top.env_h.agnt_mac[1].mon_h [RX MONITOR] RXD = 8f
+# UVM_INFO ./top/../config/../agents/eth_mon.sv(51) @ 396: uvm_test_top.env_h.agnt_mac[1].mon_h [RX MONITOR] counter vaue = 2
+# UVM_INFO verilog_src/uvm-1.1d/src/base/uvm_objection.svh(1267) @ 396: reporter [TEST_DONE] 'run' phase is ready to proceed to the 'extract' phase
+# UVM_INFO ./top/../config/../env/eth_scb.sv(45) @ 396: uvm_test_top.env_h.scb_h [eth_scb] Entered Check Phase
+# UVM_INFO ./top/../config/../env/eth_scb.sv(51) @ 396: uvm_test_top.env_h.scb_h [eth_scb] Entered Report Phase
+# 
+# --- UVM Report Summary ---
+# 
+# ** Report counts by severity
+# UVM_INFO :  715
+# UVM_WARNING :    0
+# UVM_ERROR :    0
+# UVM_FATAL :    0
+# ** Report counts by id
+# [RNTST]     1
+# [RX MONITOR]   200
+# [TEST_DONE]     1
+# [TX MONITOR]   100
+# [UVMTOP]     1
+# [eth_drv]     4
+# [eth_mon]     4
+# [eth_sbscr]   200
+# [eth_scb]   202
+# [rand_data]     1
+# [virtual_seq]     1
+# ** Note: $finish    : C:/questasim64_2025.2_1/win64/../verilog_src/uvm-1.1d/src/base/uvm_root.svh(430)
+#    Time: 396 ns  Iteration: 66  Instance: /eth_top
+# qwavedb_dumpvars : Simulation ending at [0 396] 0
+# 
+# 
+# End time: 10:27:17 on May 20,2026, Elapsed time: 0:00:39
+# Errors: 0, Warnings: 1
