@@ -1,0 +1,8 @@
+2 7 uvm_pkg 4 fast 32 C:/questasim64_2025.2_1/uvm-1.1d 0 0 26902528 0 136476 0
+2 14 questa_uvm_pkg 4 fast 32 C:/questasim64_2025.2_1/uvm-1.1d 0 0 1480704 26902528 7036 0
+1 15 eth_top_sv_unit 4 fast 53 C:/Ethernet_Internal_Code_Changes/ethernet_1gbps/work 0 0 5625856 26902528 15123 0
+2 18 eth_gmii_interface 5 synth 53 C:/Ethernet_Internal_Code_Changes/ethernet_1gbps/work 0 0 0 0 0 0
+2 16 eth_ui_interface 5 synth 53 C:/Ethernet_Internal_Code_Changes/ethernet_1gbps/work 0 0 0 0 0 0
+2 18 eth_gmii_interface 7 fast__2 53 C:/Ethernet_Internal_Code_Changes/ethernet_1gbps/work 0 0 0 0 275 0
+2 16 eth_ui_interface 7 fast__2 53 C:/Ethernet_Internal_Code_Changes/ethernet_1gbps/work 0 0 0 0 33 0
+1 7 eth_top 4 fast 53 C:/Ethernet_Internal_Code_Changes/ethernet_1gbps/work 0 0 131072 29819904 2624 0

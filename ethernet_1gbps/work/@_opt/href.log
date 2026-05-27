@@ -1,0 +1,24 @@
+BEGIN 3:eth_gmii_interface:fast__2:work
+    TX_EN :  1:eth_top:fast:work
+    TX_ER :  1:eth_top:fast:work
+    RXD :  1:eth_top:fast:work
+    RX_DV :  1:eth_top:fast:work
+    RX_ER :  1:eth_top:fast:work
+    TX_CLK :  1:eth_top:fast:work
+    COL :  1:eth_top:fast:work
+    RX_CLK :  1:eth_top:fast:work
+    CRS :  1:eth_top:fast:work
+    TXD :  1:eth_top:fast:work
+END 
+BEGIN 3:eth_gmii_interface:fast__1:work
+    RX_ER :  1:eth_top_sv_unit:fast:work
+    TX_EN :  1:eth_top_sv_unit:fast:work
+    TX_ER :  1:eth_top_sv_unit:fast:work
+    TXD :  1:eth_top_sv_unit:fast:work
+    COL :  1:eth_top_sv_unit:fast:work
+    RXD :  1:eth_top_sv_unit:fast:work
+    rst :  1:eth_top_sv_unit:fast:work
+    RX_DV :  1:eth_top_sv_unit:fast:work
+    TX_CLK :  1:eth_top_sv_unit:fast:work
+    RX_CLK :  1:eth_top_sv_unit:fast:work
+END 
