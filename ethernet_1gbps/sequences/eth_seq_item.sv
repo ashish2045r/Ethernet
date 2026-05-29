@@ -11,6 +11,8 @@ class eth_seq_item extends uvm_sequence_item;
   bit multi_mac_addr[`NO_OF_AGENTS][bit [47:0]];
   bit mode;
   bit carr_ext_en;
+  bit [47:0] agt_addr;
+  int tx_count;
   
   //VLAN Fields
   bit vlan_en;
@@ -32,14 +34,16 @@ class eth_seq_item extends uvm_sequence_item;
   bit corrupt_fcs_en;
   int ipg_cnt;
   
-   bit preamble_err;
-   int rx_count; 
+  bit preamble_err;
+  int rx_count; 
   bit padding_en;
   
   //pfc
   bit pfc_frame_en;
   bit [15:0] priority_en_vector; 
   bit [15:0] pfc_pause_time[8];  
+  bit max_coll_en;
+  int constant_rand_slot;
   
   `uvm_object_utils_begin(eth_seq_item)
   `uvm_field_int(da, UVM_ALL_ON)   // <-- DA
@@ -52,11 +56,10 @@ class eth_seq_item extends uvm_sequence_item;
   function new(string name = "transaction");
     super.new(name);
     
-    for (int i = 0; i < `NO_OF_AGENTS; i++) begin
+    for (int i = 0; i < `NO_OF_AGENTS; i++)
       mac_addr[i] = {8'h00,8'(8'h50 + i),8'(8'h40 + i),8'(8'h30 + i),8'(8'h20 + i),8'(8'h10 + i)};
-    end  
-
-    mac_multicast(multi_mac_addr);  
+    mac_multicast(multi_mac_addr);
+    
   endfunction
   
   
@@ -84,4 +87,5 @@ class eth_seq_item extends uvm_sequence_item;
   constraint sa_da_not_match{ da != sa ;}
   constraint pause_time_range{soft pause_time inside {[1:10]};}
 endclass
+
 

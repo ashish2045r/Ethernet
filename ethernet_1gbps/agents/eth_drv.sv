@@ -47,7 +47,7 @@ class eth_drv extends uvm_driver#(eth_seq_item);
       //pfc_timer();
     join_none       
     forever begin    
-      wait(globals::pause_flag[this.mac_id]==0);
+      wait(statistics::pause_flag[this.mac_id]==0);
       seq_item_port.get_next_item(tr);
       frame_pack(tr);
       retry_q = frame_q;
@@ -64,22 +64,22 @@ class eth_drv extends uvm_driver#(eth_seq_item);
     int prev_pause_value;
 
     forever begin
-      wait(globals::pause_flag[mac_id] == 1);
+      wait(statistics::pause_flag[mac_id] == 1);
       wait(frame_in_progress == 0);
-      prev_pause_value = globals::pause_value[mac_id];
+      prev_pause_value = statistics::pause_value[mac_id];
       local_pause_cycles = prev_pause_value * PAUSE_QUANTA_CYCLES;
       `uvm_info("PAUSE_DBG", $sformatf("*********************mac=%0d remaining=%0d pause_value=%0d update=%0b",
-               mac_id, local_pause_cycles, globals::pause_value[mac_id], globals::pause_update[mac_id]), UVM_LOW)
+               mac_id, local_pause_cycles, statistics::pause_value[mac_id], statistics::pause_update[mac_id]), UVM_LOW)
 
       while(local_pause_cycles > 0) begin
         @(posedge v_intf.TX_CLK);
         v_intf.TX_EN <= 0;
         v_intf.TXD   <= 0;
         v_intf.TX_ER <= 0;
-        if(globals::pause_update[mac_id]) begin
-          prev_pause_value = globals::pause_value[mac_id];
+        if(statistics::pause_update[mac_id]) begin
+          prev_pause_value = statistics::pause_value[mac_id];
           local_pause_cycles = prev_pause_value * PAUSE_QUANTA_CYCLES;
-          globals::pause_update[mac_id] =0;
+          statistics::pause_update[mac_id] =0;
           `uvm_info("PAUSE_UPDATE", $sformatf("Pause updated new=%0d",local_pause_cycles), UVM_LOW)
         end
         else begin
@@ -87,7 +87,7 @@ class eth_drv extends uvm_driver#(eth_seq_item);
         end
       end
 
-      globals::pause_flag[mac_id] = 0;
+      statistics::pause_flag[mac_id] = 0;
       `uvm_info("PAUSE", $sformatf("TX Resume mac_id=%0d",mac_id), UVM_LOW)
     end
   endtask
@@ -101,9 +101,9 @@ class eth_drv extends uvm_driver#(eth_seq_item);
     forever begin
       @(posedge v_intf.TX_CLK);
       for(int i=0; i<8; i++) begin
-        if(globals::pfc_flag[mac_id][i]) begin
-          if(prev_pfc_value[i] != globals::pfc_value[mac_id][i]) begin
-            prev_pfc_value[i] = globals::pfc_value[mac_id][i];
+        if(statistics::pfc_flag[mac_id][i]) begin
+          if(prev_pfc_value[i] != statistics::pfc_value[mac_id][i]) begin
+            prev_pfc_value[i] = statistics::pfc_value[mac_id][i];
             local_pfc_cycles[i] = prev_pfc_value[i] * PAUSE_QUANTA_CYCLES;
             `uvm_info("PFC_UPDATE", $sformatf("Priority=%0d pause_value=%0d pause_cycles=%0d", 
                       i, prev_pfc_value[i], local_pfc_cycles[i]), UVM_LOW)
@@ -113,7 +113,7 @@ class eth_drv extends uvm_driver#(eth_seq_item);
         if(local_pfc_cycles[i] > 0) begin
           local_pfc_cycles[i]--;
           if(local_pfc_cycles[i] == 0) begin
-            globals::pfc_flag[mac_id][i] = 0;
+            statistics::pfc_flag[mac_id][i] = 0;
             prev_pfc_value[i] = 0;
             `uvm_info("PFC_RESUME", $sformatf("Priority=%0d resumed", i), UVM_LOW)
            end
@@ -147,9 +147,9 @@ class eth_drv extends uvm_driver#(eth_seq_item);
   
   task pfc_check(eth_seq_item tr);
     if(tr.vlan_en && !tr.pfc_frame_en && !tr.pause_frame_en) begin
-      if(globals::pfc_flag[mac_id][tr.PCP] && globals::pfc_value[mac_id][tr.PCP] > 0) begin
+      if(statistics::pfc_flag[mac_id][tr.PCP] && statistics::pfc_value[mac_id][tr.PCP] > 0) begin
         `uvm_info("PFC_BLOCK", $sformatf("Blocking priority %0d transmission", tr.PCP), UVM_LOW)
-         wait(globals::pfc_flag[mac_id][tr.PCP] == 0);
+         wait(statistics::pfc_flag[mac_id][tr.PCP] == 0);
         end
      end
   endtask    

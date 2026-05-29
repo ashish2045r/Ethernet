@@ -1,4 +1,4 @@
-class globals;
+class statistics;
  
   static virtual eth_ui_interface v_uif[bit[47:0]];
  

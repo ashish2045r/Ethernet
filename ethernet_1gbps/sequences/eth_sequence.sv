@@ -61,32 +61,32 @@ class gmii_eth_normal_frame_seq extends base_seq;
     `uvm_info(get_type_name(), "gmii_eth_normal_frame_seq: Inside Body", UVM_LOW)
     
     uvm_config_db#(bit)::set(null,"*","mode",mode);
-      req = eth_seq_item::type_id::create("req");
+    req = eth_seq_item::type_id::create("req");
     
-      start_item(req);
-       trans_count++;
+    start_item(req);
+    trans_count++;
     
-     exact_pkt = find_no(trans_count);
-      if(this.invld_length_en == 1)
-        c_ether_type = $urandom_range(1500, 1536);
+    exact_pkt = find_no(trans_count);
+    if(this.invld_length_en == 1)
+      c_ether_type = $urandom_range(1500, 1536);
       
       
-      if(this.carr_ext_en == 1) begin
-        c_ether_type = $urandom_range(46,486);
-        req.carr_ext_en = carr_ext_en;
-      end      
+    if(this.carr_ext_en == 1) begin
+      c_ether_type = $urandom_range(46,486);
+      req.carr_ext_en = carr_ext_en;
+    end      
       
     if(this.padding_en == 1)
       req.padding_en = 1;
     
-      //Runt Frame
-      if(this.runt_en == 1) begin
-        send_runt = $random;
+    //Runt Frame
+    if(this.runt_en == 1) begin
+      send_runt = $random;
       
-        if(send_runt == 1)
-          c_ether_type = $urandom_range(0,45);
-        else
-          c_ether_type = $urandom_range(46,1500);
+      if(send_runt == 1)
+        c_ether_type = $urandom_range(0,45);
+      else
+        c_ether_type = $urandom_range(46,1500);
       end
         
     
@@ -95,31 +95,31 @@ class gmii_eth_normal_frame_seq extends base_seq;
       else
         req.randomize() with {sa == p_sequencer.mac_addr;       
                               ether_type == c_ether_type;};  
-     //Fixing DA constant
-    //if(trans_count % 2 != 0) begin
-    //  if(trans_count == 1)
-    //    temp_da1 = req.da;
-    //  else
-    //    req.da = temp_da1;
-    //end else begin
-    //  if(trans_count == 2)
-    //    temp_da2 = req.da;
-    //  else
-    //    req.da = temp_da2;
-    //end      
+      //Fixing DA constant
+      //if(trans_count % 2 != 0) begin
+      //  if(trans_count == 1)
+      //    temp_da1 = req.da;
+      //  else
+      //    req.da = temp_da1;
+      //end else begin
+      //  if(trans_count == 2)
+      //    temp_da2 = req.da;
+      //  else
+      //    req.da = temp_da2;
+      //end      
 
       req.mode = mode;
       
       if(custom_da)
         req.da=da;   
       
-//       if(len_payload_mismat_en) begin
-//         req.ether_type = $urandom_range(46,1500);
-//       end  
+      //       if(len_payload_mismat_en) begin
+      //         req.ether_type = $urandom_range(46,1500);
+      //       end  
       
-    /* if(this.pause_rsd_en) begin
+      /* if(this.pause_rsd_en) begin
         req.pause_frame_en = 1;
- 	    req.pause_opc      = 16'h0002;
+ 	      req.pause_opc      = 16'h0002;
         req.ether_type     = 16'h8808;
         req.pause_time     = 1; //$urandom_range(1,10)
       
@@ -149,10 +149,10 @@ class gmii_eth_normal_frame_seq extends base_seq;
         
       end
       
-    //--------------------pause_frame--------
+      //--------------------pause_frame--------
 
       if(pause_sel) begin
-  	req.pause_frame_en = 1;
+  	    req.pause_frame_en = 1;
         req.pause_opc      = 16'h0001;
         req.ether_type     = 16'h8808;
         req.pause_time     = this.pause_time;
@@ -171,40 +171,40 @@ class gmii_eth_normal_frame_seq extends base_seq;
        // req.da = 48'h01_80_c2_00_00_01;
         req.vlan_en      = 0;
         req.ether_type =16'h8808;
-       req.priority_en_vector[3] = 1;// priority[3] 
-//         for(int i=0;i<8;i++) 
-//         	req.pfc_pause_time[i]=16'h0;
+        req.priority_en_vector[3] = 1;// priority[3] 
+        //         for(int i=0;i<8;i++) 
+        //         	req.pfc_pause_time[i]=16'h0;
       
-       req.pfc_pause_time[3]=16'h0002; //priority[3];
+        req.pfc_pause_time[3]=16'h0002; //priority[3];
           
       end  
   
     
       //length and payload mismatch
-    if(len_payload_mismat_en == 1 && error_pkt_no == exact_pkt) begin
+      if(len_payload_mismat_en == 1 && error_pkt_no == exact_pkt) begin
         req.ether_type = $urandom_range(46,1500);
         `uvm_info("LEN_MISMATCH",
                   $sformatf("Sending wrong Length in Transaction=%d",exact_pkt),UVM_LOW)
-    end
+      end
       
       
       
       //CORRUPTED PREAMBLE
-    if(this.corrupt_preamble_en == 1 && pkt_no == exact_pkt) begin
+      if(this.corrupt_preamble_en == 1 && pkt_no == exact_pkt) begin
           req.preamble[3] = 8'hFF;
           `uvm_info("PREAMBLE CORRUPT", $sformatf("Sending Corrupted Preamble Packet, Transaction no = %0d",exact_pkt),UVM_LOW)
       end
       
    
       //CORRUPT FCS
-    if(this.corrupt_fcs_en == 1 && (error_pkt_no == exact_pkt || send_runt == 1 || req.ether_type > 1518)) begin
+      if(this.corrupt_fcs_en == 1 && (error_pkt_no == exact_pkt || send_runt == 1 || req.ether_type > 1518)) begin
           req.corrupt_fcs_en = 1;
           `uvm_info("CORRUPT FCS TX",$sformatf("Sending bad fcs in Transaction = %0d",exact_pkt),UVM_LOW)
       end else
         req.corrupt_fcs_en = 0;
       
       //CORRUPT IPG
-    if(this.corrupt_ipg_en == 1 && error_pkt_no == exact_pkt) begin        
+      if(this.corrupt_ipg_en == 1 && error_pkt_no == exact_pkt) begin        
       req.ipg_cnt = 7;
           `uvm_info("CORRUPT IPG",$sformatf("Sending Corrupted IPG Frame after Transaction no = %0d, IPG Count = %0d",exact_pkt,req.ipg_cnt),UVM_LOW)
       end else

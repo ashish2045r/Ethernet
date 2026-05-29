@@ -7,7 +7,7 @@ module eth_top;
   bit rst;
   bit mode = 1;
    
-  // Intermediate Signals
+  // Intermediate Signals---------------------------------------
   logic [7:0] txd   [`NO_OF_AGENTS];
   logic       tx_en [`NO_OF_AGENTS];
   logic       tx_er [`NO_OF_AGENTS];
@@ -42,13 +42,14 @@ module eth_top;
   bit 	      ipg[`NO_OF_AGENTS];
   
   
-  //----------------------------
+  //----------------------------------------------------------
 
   parameter real HALF_PERIOD = 1000 / (2 * `FREQ_IN_MHZ);
   
   eth_gmii_interface gmii_if[`NO_OF_AGENTS](rst);
   eth_ui_interface ui_inf[`NO_OF_AGENTS]();
 
+  // Seting GMII Intf to Config_db
   genvar i;
   generate
     for (i = 0; i < `NO_OF_AGENTS; i++) begin : gen_config
@@ -71,7 +72,8 @@ module eth_top;
 
   endgenerate
   
-
+  // Initializing the unicast and multicast mac addresses and getting duplex
+  // mode
   initial begin
     mac_unicast(mac_uni);
     mac_multicast(mac_multi);
@@ -80,10 +82,11 @@ module eth_top;
       `uvm_info("UVM_TOP","MODE FAIL,Can't able to get mode", UVM_LOW);
   end
   
+  // initializing the statistics virtual interface with mac addr
   generate
   for(i=0; i<`NO_OF_AGENTS; i++) begin
     initial begin
-      globals::v_uif[mac_uni[i]] = ui_inf[i];
+      statistics::v_uif[mac_uni[i]] = ui_inf[i];
       $display("top display for mac: %h",mac_uni[i]);
     end
   end
@@ -223,7 +226,7 @@ module eth_top;
 
   ///////////////////////////  
  
-  // GMII signals connection
+  // Half Duplex interconnect
   always_comb begin 
     
     int tx_count;
@@ -287,25 +290,14 @@ module eth_top;
         end
         
         
-//         if(col[0]) begin
-//           while(tx_en[tx_index] || tx_er[tx_index]) begin
-//             for(int i=0; i<`NO_OF_AGENTS; i++) begin
-//             crs[i]   = 1;
-//             if(i!=tx_index) begin
-//               rxd_hd[i]   = txd[tx_index];
-//               rx_dv_hd[i] = tx_en[tx_index];
-//               rx_er_hd[i] = tx_er[tx_index];
-//              end
-//           end
-//           end
-//         end
-        
       end
       
     end
     
   end
-  
+ 
+
+  // Connecting the variables from duplex interconnect to intermediate variables 
   always_comb begin
     for (int i=0; i<`NO_OF_AGENTS; i++) begin
       if (mode) begin
@@ -319,7 +311,8 @@ module eth_top;
       end
     end
   end
-    
+  
+  // connecting intermediate variables with GMII Rx Signals  
   generate
     for(i=0; i<`NO_OF_AGENTS; i++) begin : gen_connect_rx
       assign gmii_if[i].RXD   = rxd[i];
@@ -330,19 +323,20 @@ module eth_top;
     end
   endgenerate
   
-    
+  // Setting and starting clock  
   initial begin
     clk = 0;
     forever #(HALF_PERIOD) clk = ~clk; 
   end
    
-
+  // Initializing the reset
   initial begin
     rst = 0;
     repeat (5) @(posedge clk);
     rst = 1;
   end
-    
+  
+  // Starting the test  
   initial begin
     run_test("");
   end
