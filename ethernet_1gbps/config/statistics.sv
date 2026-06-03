@@ -4,11 +4,11 @@ class statistics;
  
   //pause
   static int  pause_value [bit[47:0]];
-  static bit  pause_flag  [`NO_OF_AGENTS];
-  static bit  pause_update[2];
+  static bit  pause_flag  [bit [47:0]];
+  static bit  pause_update[bit [47:0]];
  
   //pfc
-  static int  pfc_value   [int][8];
-  static bit  pfc_flag    [`NO_OF_AGENTS][8];
-  static bit  pfc_active  [`NO_OF_AGENTS][8];
+  static int  pfc_value   [bit [47:0]][8];
+  static bit  pfc_flag    [bit [47:0]][8];
+  static bit  pfc_update  [bit [47:0]][8];
 endclass

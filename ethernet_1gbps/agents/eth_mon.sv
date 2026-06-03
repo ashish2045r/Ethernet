@@ -6,11 +6,11 @@ class eth_mon extends uvm_monitor;
   virtual eth_gmii_interface v_intf;
   bit [47:0] mac_addr;
   bit multi_mac_addr[bit [47:0]];
-  int mac_id;
   int rx_pkt_count;
   int tx_pkt_count;
   bit [7:0] tx_frame_q[$];
   bit [7:0] rx_frame_q[$];
+  bit half_duplex;
 
   function new(string name="eth_mon", uvm_component parent=null);
     super.new(name,parent);
@@ -51,12 +51,12 @@ class eth_mon extends uvm_monitor;
     bit [47:0] tx_da;
     int tx_ipg_violation_count;
     bit invalid_ethertype_tx;
-    bit bad_preamble_sfd_tx;
+    bit bad_sfd_tx;
+    bit bad_preamble_tx;
     bit tx_er_seen;
     bit len_mismatch_tx;
     bit carrier_ext_seen;
     int carrier_ext_cnt;
-    bit collision_pkt_seen;
     bit pkt_bad;
     int min_payload;
     tx_ipg_violation_count=96;
@@ -68,12 +68,12 @@ class eth_mon extends uvm_monitor;
       tx_frame_q.delete();
       bad_pkt              = 0;
       collision_seen       = 0;
-      collision_pkt_seen   = 0;
       crc_ok               = 0;
       da_match             = 0;
       byte_cnt             = 0;
       invalid_ethertype_tx = 0;
-      bad_preamble_sfd_tx  = 0;
+      bad_preamble_tx      = 0;
+      bad_sfd_tx 	   = 0;
       tx_er_seen           = 0;
       len_mismatch_tx      = 0;
       pkt_bad              = 0;
@@ -81,7 +81,7 @@ class eth_mon extends uvm_monitor;
       if(v_intf.TX_EN) begin
 	if(tx_ipg_violation_count < 96) begin
 	  statistics::v_uif[mac_addr].tx_ipg_violation_count++;
-	  `uvm_info("UVM_ERROR::TX_IPG_VIOLATION",$sformatf("IFG violation detected IFG=%0d bit-times",tx_ipg_violation_count),UVM_LOW)
+	  `uvm_error("TX_IPG_VIOLATION",$sformatf("IFG violation detected IFG=%0d bit-times",tx_ipg_violation_count))
 	end
 	else 
 	`uvm_info("TX_IPG",$sformatf("IFG detected IFG=%0d bit-times",tx_ipg_violation_count),UVM_LOW)
@@ -106,7 +106,7 @@ class eth_mon extends uvm_monitor;
         if(byte_cnt < 7) begin
           if(v_intf.TXD != 8'h55) begin
             bad_pkt = 1;
-            bad_preamble_sfd_tx = 1;
+            bad_preamble_tx = 1;
           end
         end
 
@@ -116,7 +116,7 @@ class eth_mon extends uvm_monitor;
         else if(byte_cnt == 7) begin
           if(v_intf.TXD != 8'hD5) begin
             bad_pkt = 1;
-            bad_preamble_sfd_tx = 1;
+            bad_sfd_tx = 1;
           end
         end
         //--------------------------------------------
@@ -143,7 +143,7 @@ class eth_mon extends uvm_monitor;
       // CREATE TR
       //------------------------------------------------
       tr = eth_seq_item::type_id::create("tr", this);
-      tx_pkt_count++;
+      if(!collision_seen) tx_pkt_count++;
       tr.tx_count=tx_pkt_count;
 
       //------------------------------------------------
@@ -170,20 +170,18 @@ class eth_mon extends uvm_monitor;
 
       if(tx_da == 48'hFF_FF_FF_FF_FF_FF)
         da_match = 1;
-
-      if(multi_mac_addr.exists(tx_da))
-        da_match = 1;
+      
+      foreach(tr.multi_mac_addr[i]) begin
+	if(mac_addr!=tr.mac_addr[i] && tr.multi_mac_addr[i].exists(tx_da))
+	  da_match = 1;
+      end
 
       //------------------------------------------------
       // COLLISION
       //------------------------------------------------
 
       if(collision_seen) begin
-        if(!collision_pkt_seen) begin
-          statistics::v_uif[mac_addr].tx_collision_count++;
-          collision_pkt_seen=1;
-        end
-        pkt_bad=1;
+	statistics::v_uif[mac_addr].tx_collision_count++;
         `uvm_info("TX_COLLISION",$sformatf("Collision detected frame_size=%0d",tx_frame_q.size()),UVM_LOW)
         continue;
       end
@@ -200,11 +198,11 @@ class eth_mon extends uvm_monitor;
       crc_ok = frame_unpack(tr, tx_frame_q, 8, 0, len_mismatch_tx, invalid_ethertype_tx);
       if(tr.vlan_en) begin
         if(tr.TPID != 16'h8100) begin
-          `uvm_info("UVM_ERROR::VLAN_TPID", $sformatf( "Invalid TPID = %h", tr.TPID),UVM_LOW)
+          `uvm_error("VLAN_TPID", $sformatf( "Invalid TPID = %h", tr.TPID))
         end
         if(tr.VID == 12'hFFF) begin
           bad_pkt=1;
-          `uvm_info("UVM_ERROR::TX::VLAN_RESERVED_VID", $sformatf( "Reserved VLAN ID detected VID=%h", tr.VID),UVM_LOW)
+          `uvm_error("TX::VLAN_RESERVED_VID", $sformatf( "Reserved VLAN ID detected VID=%h", tr.VID))
         end
         if(tr.VID == 12'h000) begin
           `uvm_info("VLAN_PRIORITY_TAG", "Priority tagged VLAN frame detected", UVM_LOW)
@@ -238,22 +236,28 @@ class eth_mon extends uvm_monitor;
       // ERROR PRINTS
       //------------------------------------------------
       if(tx_er_seen) begin
-        `uvm_info("UVM_ERROR::TX_ERR", $sformatf( "TX_ER asserted frame_size=%0d", tx_frame_q.size()),UVM_LOW)
+        `uvm_error("TX_ERR", $sformatf( "TX_ER asserted frame_size=%0d", tx_frame_q.size()))
       end
-      if(bad_preamble_sfd_tx) begin
-        `uvm_info("UVM_ERROR::TX_PREAMBLE_SFD", $sformatf( "Bad Preamble/SFD frame_size=%0d", tx_frame_q.size()),UVM_LOW)
+      if(bad_preamble_tx) begin
+        `uvm_error("TX_PREAMBLE", $sformatf( "Bad Preamble frame_size=%0d", tx_frame_q.size()))
+      end
+      if(bad_sfd_tx) begin
+        `uvm_error("TX_SFD", $sformatf( "Bad SFD frame_size=%0d", tx_frame_q.size()))
       end
       if(!da_match) begin
-        `uvm_info("UVM_ERROR::TX_DA", $sformatf( "Invalid DA=%h", tx_da),UVM_LOW)
+        `uvm_error("TX_INVALID_DA", $sformatf( "Invalid DA=%h", tx_da))
       end
       if(invalid_ethertype_tx) begin
-        `uvm_info("UVM_ERROR::TX_ETHERTYPE", $sformatf( "Undefined EtherType=%0d", tr.ether_type),UVM_LOW)
+        `uvm_error("TX_UNDEFINED_ETHERTYPE", $sformatf( "Undefined EtherType=%0d", tr.ether_type))
       end
-      if(len_mismatch_tx) begin
-        `uvm_info("UVM_ERROR::TX_LEN", $sformatf( "Length mismatch detected"),UVM_LOW)
+      if(len_mismatch_tx && tr.payload.size()>=46) begin
+        `uvm_error("TX_LEN", $sformatf( "Length mismatch detected"))
       end
-      if(!crc_ok) begin
-        `uvm_info("UVM_ERROR::TX_CRC", $sformatf( "Bad CRC DA=%h SA=%h CRC=%h", tr.da, tr.sa, tr.crc),UVM_LOW)
+      if(!crc_ok && tr.payload.size()>=46) begin
+        `uvm_error("TX_CRC", $sformatf( "Bad CRC DA=%h SA=%h CRC=%h", tr.da, tr.sa, tr.crc))
+      end
+      if(!crc_ok && tr.payload.size()<46) begin
+        `uvm_error("TX_FRAGMENT_CRC", $sformatf( "Bad CRC DA=%h SA=%h CRC=%h", tr.da, tr.sa, tr.crc))
       end
       //------------------------------------------------
       // CLASSIFICATION
@@ -280,7 +284,7 @@ class eth_mon extends uvm_monitor;
       	   statistics::v_uif[mac_addr].tx_fragment_count++;
       	   //addr_classify_tx(tr);
       	   pkt_bad = 1;
-      	   `uvm_info("UVM_ERROR::TX_FRAGMENT",$sformatf("Fragment detected payload=%0d",tr.payload.size()),UVM_LOW)
+      	   `uvm_error("TX_FRAGMENT",$sformatf("Fragment detected payload=%0d",tr.payload.size()))
       	 end
       end    
       if(tr.payload.size()>1536) begin
@@ -290,7 +294,7 @@ class eth_mon extends uvm_monitor;
       	 end
       	 else begin
       	   statistics::v_uif[mac_addr].tx_jabber_count++;
-      	   `uvm_info("UVM_ERROR::TX_JABBER",$sformatf("Jabber detected payload=%0d",tr.payload.size()),UVM_LOW)
+      	   `uvm_error("TX_JABBER",$sformatf("Jabber detected payload=%0d",tr.payload.size()))
 	   pkt_bad=1;
       	 end
       end
@@ -302,10 +306,10 @@ class eth_mon extends uvm_monitor;
         tr.ether_type == 16'h8808) begin  
         statistics::v_uif[mac_addr].tx_good_pkt_count++;
         if(tr.pause_time == 0)
-          statistics::v_uif[mac_addr].tx_pause_xoff_count++;
+          statistics::v_uif[mac_addr].tx_pause_xon_count++;
         else
-     	  statistics::v_uif[mac_addr].tx_pause_xon_count++;
-      	  `uvm_info("TX_PAUSE_BLOCK",$sformatf("pause_frame_en=%0d ether_type=%h pause_opc=%h pause_time=%0d", 
+     	  statistics::v_uif[mac_addr].tx_pause_xoff_count++;
+      	  `uvm_info("RX_PAUSE_BLOCK",$sformatf("pause_frame_en=%0d ether_type=%h pause_opc=%h pause_time=%0d", 
 		  tr.pause_frame_en,tr.ether_type,tr.pause_opc,tr.pause_time),UVM_LOW)
        	  continue;
       	end
@@ -314,7 +318,7 @@ class eth_mon extends uvm_monitor;
       	  tr.ether_type == 16'h8808) begin
       	  statistics::v_uif[mac_addr].tx_pfc_count++;
       	  statistics::v_uif[mac_addr].tx_good_pkt_count++;
-      	  addr_classify_tx(tr);
+      	  //addr_classify_tx(tr);
       	  `uvm_info("RX_PFC_BLOCK","PFC frame blocked from scoreboard",UVM_LOW)
       	  continue;
       	end
@@ -359,7 +363,8 @@ class eth_mon extends uvm_monitor;
     bit [47:0] rx_da;
     bit invalid_ethertype;
     int rx_ipg_violation_count;
-    bit bad_preamble_sfd;
+    bit bad_preamble;
+    bit bad_sfd;
     bit rx_er_seen;
     bit collision_seen_rx;
     time last_pause_rx_time;
@@ -374,8 +379,6 @@ class eth_mon extends uvm_monitor;
     forever begin
       collision_seen_rx =0;
       while(!v_intf.RX_DV)begin
-       	if(v_intf.COL)
-	         collision_seen_rx=1;
        	rx_ipg_violation_count += 8;
        	@(posedge v_intf.RX_CLK);
       end
@@ -383,14 +386,15 @@ class eth_mon extends uvm_monitor;
       bad_pkt  = 0;
       byte_cnt = 0;
       len_mismatch_rx=0;
-      bad_preamble_sfd  = 0;
+      bad_preamble  = 0;
+      bad_sfd  = 0;
       rx_er_seen        = 0;
       invalid_ethertype=0;
 
       if(v_intf.RX_DV) begin
        	if(rx_ipg_violation_count < 96) begin
 	  statistics::v_uif[mac_addr].rx_ipg_violation_count++;
-	  `uvm_info("UVM_ERROR::RX_IPG_VIOLATION",$sformatf("IFG violation detected IFG=%0d bit-times",rx_ipg_violation_count),UVM_LOW)
+	  `uvm_error("RX_IPG_VIOLATION",$sformatf("IFG violation detected IFG=%0d bit-times",rx_ipg_violation_count))
         end
         else begin
 	  `uvm_info("RX_IPG",$sformatf("IFG detected IFG=%0d bit-times",
@@ -407,14 +411,14 @@ class eth_mon extends uvm_monitor;
             if(v_intf.RXD != 8'h55) begin
               if(!bad_pkt)
          	      bad_pkt = 1;
-              bad_preamble_sfd = 1;
+              bad_preamble = 1;
             end
           end
           else if(byte_cnt == 7) begin
             if(v_intf.RXD != 8'hD5) begin
               if(!bad_pkt)
          	bad_pkt = 1;
-              bad_preamble_sfd = 1;
+              bad_sfd = 1;
             end
           end      
           else begin
@@ -433,9 +437,14 @@ class eth_mon extends uvm_monitor;
 	       @(posedge v_intf.RX_CLK);
       end
       if(rx_carrier_ext_seen) begin
-	       statistics::v_uif[mac_addr].rx_carrier_ext_count++;
-	       `uvm_info("RX_CARRIER_EXT",$sformatf("Carrier extension bytes=%0d",rx_carrier_ext_count),UVM_LOW)
+	statistics::v_uif[mac_addr].rx_carrier_ext_count++;
+	half_duplex = 1;
+	`uvm_info("RX_CARRIER_EXT",$sformatf("Carrier extension bytes=%0d",rx_carrier_ext_count),UVM_LOW)
       end
+      
+      if(v_intf.COL)
+        collision_seen_rx=1;
+
       //------------------------------------------------
       // create transaction
       //------------------------------------------------
@@ -479,7 +488,7 @@ class eth_mon extends uvm_monitor;
       // COLLISION
       //------------------------------------------------
       if(collision_seen_rx) begin
-        statistics::v_uif[mac_addr].rx_collision_count++;
+	half_duplex = 1;
         `uvm_info("RX_COLLISION",$sformatf("Collision detected frame_size=%0d",rx_frame_q.size()),UVM_LOW)
          continue;
       end
@@ -489,11 +498,13 @@ class eth_mon extends uvm_monitor;
       if(bad_pkt) begin
         addr_classify_rx(tr);
 	if(rx_er_seen) begin
-          `uvm_info("UVM_ERROR::RX_ERR", $sformatf( "RX_ER asserted : Dropping packet frame_size=%0d", rx_frame_q.size()),UVM_LOW)	  
+          `uvm_error("RX_ERR", $sformatf( "RX_ER asserted : Dropping packet frame_size=%0d", rx_frame_q.size()))	  
 	end
-	if(bad_preamble_sfd) begin
-	  `uvm_info("UVM_ERROR::RX_PREAMBLE_SFD", $sformatf( "Bad Preamble/SFD detected : Dropping packet frame_size=%0d", 
-		  rx_frame_q.size()),UVM_LOW)	  
+	if(bad_preamble) begin
+	  `uvm_error("RX_PREAMBLE", $sformatf( "Bad Preamble detected : Dropping packet frame_size=%0d", rx_frame_q.size()))	  
+	end
+	if(bad_sfd) begin
+	  `uvm_error("RX_SFD", $sformatf( "Bad SFD detected : Dropping packet frame_size=%0d", rx_frame_q.size()))	  
 	end    
         statistics::v_uif[mac_addr].rx_bad_pkt_count++;
 	continue;
@@ -504,31 +515,31 @@ class eth_mon extends uvm_monitor;
       if(!da_match) begin
 	addr_classify_rx(tr);
        	statistics::v_uif[mac_addr].rx_bad_pkt_count++;
-       	`uvm_info("UVM_ERROR::RX_MON", $sformatf("Invalid DA = %h", rx_da),UVM_LOW)
+       	`uvm_error("RX_INVALID_DA", $sformatf("Invalid DA = %h", rx_da))
        	continue;
       end
       crc_ok = frame_unpack(tr, rx_frame_q, 0, 1, len_mismatch_rx,invalid_ethertype);
       if(invalid_ethertype) begin
 	addr_classify_rx(tr);
 	statistics::v_uif[mac_addr].rx_bad_pkt_count++;
-	`uvm_info("UVM_ERROR::RX_UNDEFINED_ETHERTYPE", $sformatf( "Dropping packet : Undefined EtherType = %0d", tr.ether_type),UVM_LOW)
+	`uvm_error("RX_UNDEFINED_ETHERTYPE", $sformatf( "Dropping packet : Undefined EtherType = %0d", tr.ether_type))
 	continue;
       end
       if(len_mismatch_rx && tr.payload.size() >= 46) begin
        	statistics::v_uif[mac_addr].rx_bad_pkt_count++;
  	addr_classify_rx(tr);
-	`uvm_info("UVM_ERROR::RX_LEN_MISMATCH", $sformatf( "Length mismatch DA=%h SA=%h payload=%0d", tr.da, tr.sa, tr.payload.size()),UVM_LOW)
+	`uvm_error("RX_LEN_MISMATCH", $sformatf( "Length mismatch DA=%h SA=%h payload=%0d", tr.da, tr.sa, tr.payload.size()))
 	continue;
       end	
       if(tr.vlan_en) begin
 	statistics::v_uif[mac_addr].rx_vlan_count++; 
 	if(tr.TPID != 16'h8100) begin
-	  `uvm_info("UVM_ERROR::VLAN_TPID", $sformatf( "Invalid TPID = %h", tr.TPID),UVM_LOW)
+	  `uvm_error("VLAN_TPID", $sformatf( "Invalid TPID = %h", tr.TPID))
         end
         if(tr.VID == 12'hFFF) begin
 	  addr_classify_rx(tr);
 	  statistics::v_uif[mac_addr].rx_bad_pkt_count++;
-	  `uvm_info("UVM_ERROR::RX::VLAN_RESERVED_VID", $sformatf( "Reserved VLAN ID detected VID=%h", tr.VID),UVM_LOW)
+	  `uvm_error("RX::VLAN_RESERVED_VID", $sformatf( "Reserved VLAN ID detected VID=%h", tr.VID))
 	  continue;
         end 
         if(tr.VID == 12'h000) begin
@@ -552,7 +563,7 @@ class eth_mon extends uvm_monitor;
       	  addr_classify_rx(tr);
       	  statistics::v_uif[mac_addr].rx_fragment_count++;
       	  statistics::v_uif[mac_addr].rx_bad_pkt_count++;
-      	  `uvm_info("RX_FRAGMENT", $sformatf( "Fragment detected payload=%0d", tr.payload.size()),UVM_LOW)
+      	  `uvm_error("RX_FRAGMENT", $sformatf( "Fragment detected payload=%0d", tr.payload.size()))
       	  continue;
       	end
       end
@@ -566,7 +577,7 @@ class eth_mon extends uvm_monitor;
       	  statistics::v_uif[mac_addr].rx_jabber_count++;
           statistics::v_uif[mac_addr].rx_bad_pkt_count++;
       	  addr_classify_rx(tr);
-      	  `uvm_info("UVM_ERROR::TX_JABBER",$sformatf("Jabber detected payload=%0d",tr.payload.size()),UVM_LOW)
+      	  `uvm_error("RX_JABBER",$sformatf("Jabber detected payload=%0d",tr.payload.size()))
       	  continue;
       	end
       end
@@ -577,10 +588,13 @@ class eth_mon extends uvm_monitor;
         end
         else begin
           statistics::v_uif[mac_addr].rx_bad_pkt_count++;
-          `uvm_info("UVM_ERROR::RX_CRC_DROP",$sformatf("Dropping packet : Bad FCS DA=%h SA=%h CRC=%h",tr.da, tr.sa, tr.crc),UVM_LOW)
+          `uvm_error("RX_CRC_DROP",$sformatf("Dropping packet : Bad FCS DA=%h SA=%h CRC=%h",tr.da, tr.sa, tr.crc))
           continue;
         end
       end
+      //------------------------------------------------
+      // PAUSE FRAME
+      //------------------------------------------------
       if(tr.pause_frame_en && tr.pause_opc == 16'h0001 && tr.ether_type == 16'h8808) begin
         statistics::pause_value[mac_addr]  = tr.pause_time;
         statistics::pause_flag[mac_addr]   = 1;
@@ -588,25 +602,28 @@ class eth_mon extends uvm_monitor;
       	statistics::v_uif[mac_addr].rx_good_pkt_count++;
       	addr_classify_rx(tr);
       	if(tr.pause_time == 0)
-      	  statistics::v_uif[mac_addr].rx_pause_xoff_count++;
+      	  statistics::v_uif[mac_addr].rx_pause_xon_count++;
       	else
-      	  statistics::v_uif[mac_addr].rx_pause_xon_count++; 
-      	  `uvm_info("RX_PAUSE_BLOCK",$sformatf("pause_frame_en=%0d ether_type=%h pause_opc=%h pause_time=%0d", 
+      	  statistics::v_uif[mac_addr].rx_pause_xoff_count++; 
+      	`uvm_info("RX_PAUSE_BLOCK",$sformatf("pause_frame_en=%0d ether_type=%h pause_opc=%h pause_time=%0d", 
 		  tr.pause_frame_en,tr.ether_type,tr.pause_opc,tr.pause_time),UVM_LOW)
-      	  continue;
-        end
-        else if(tr.pfc_frame_en && tr.pause_opc == 16'h0101 && tr.ether_type == 16'h8808) begin
-      	  statistics::v_uif[mac_addr].rx_pfc_count++;
-      	  statistics::v_uif[mac_addr].rx_good_pkt_count++;	
-      	  addr_classify_rx(tr);
-      	  for(int i=0;i<8;i++) begin
-      	    if(tr.priority_en_vector[i]) begin
-      	      statistics::pfc_value[mac_addr][i] = tr.pfc_pause_time[i];
-      	      statistics::pfc_flag[mac_addr][i] = 1;
-      	    end
+      	continue;
+      end
+      //------------------------------------------------
+      // PFC FRAME
+      //------------------------------------------------
+      else if(tr.pfc_frame_en && tr.pause_opc == 16'h0101 && tr.ether_type == 16'h8808) begin
+      	statistics::v_uif[mac_addr].rx_pfc_count++;
+      	statistics::v_uif[mac_addr].rx_good_pkt_count++;	
+      	addr_classify_rx(tr);
+      	for(int i=0;i<8;i++) begin
+      	  if(tr.priority_en_vector[i]) begin
+      	    statistics::pfc_value[mac_addr][i] = tr.pfc_pause_time[i];
+      	    statistics::pfc_flag[mac_addr][i] = 1;
       	  end
-      	  `uvm_info("RX_PFC_BLOCK","PFC frame blocked from scoreboard",UVM_LOW)
-      	  continue;
+      	end
+      	`uvm_info("RX_PFC_BLOCK","PFC frame blocked from scoreboard",UVM_LOW)
+      	continue;
       end
       else if(tr.ether_type == 16'h8808 && tr.pause_opc != 16'h0001 && tr.pause_opc != 16'h0101) begin
        	statistics::v_uif[mac_addr].rx_control_pkt_count++;
@@ -624,11 +641,8 @@ class eth_mon extends uvm_monitor;
       end
       //addr_classify_rx(tr);
       fork
-	if(v_intf.COL) begin
-          #20 rx_ap.write(tr);
-        end
-      	else 
-          rx_ap.write(tr);
+	if(half_duplex) #20 rx_ap.write(tr);
+      	else rx_ap.write(tr);
       join_none
     end
   endtask
@@ -645,8 +659,14 @@ class eth_mon extends uvm_monitor;
   task addr_classify_tx(eth_seq_item tr);
     if(tr.da == 48'hFF_FF_FF_FF_FF_FF)
       statistics::v_uif[mac_addr].tx_broadcast_count++;
-    else if(multi_mac_addr.exists(tr.da))
-      statistics::v_uif[mac_addr].tx_multicast_count++;
+    else if (tr.da[40]) begin
+      foreach(tr.multi_mac_addr[i]) begin
+	if(mac_addr!=tr.mac_addr[i] && tr.multi_mac_addr[i].exists(tr.da)) begin
+	  statistics::v_uif[mac_addr].tx_multicast_count++;
+	  break;
+	end
+      end
+    end
     else
       statistics::v_uif[mac_addr].tx_unicast_count++;
   endtask
@@ -746,8 +766,8 @@ class eth_mon extends uvm_monitor;
           if(payload_size < min_payload) begin
             if(actual_payload_size != min_payload) begin
               len_mismatch = 1;
-              `uvm_info("UVM_ERROR::MON_PADDING_ERROR", $sformatf( "Wrong padding length=%0d actual=%0d expected=%0d", 
-		      payload_size, actual_payload_size, min_payload),UVM_LOW)
+              `uvm_error("MON_PADDING_ERROR", $sformatf( "Wrong padding length=%0d actual=%0d expected=%0d", 
+		      payload_size, actual_payload_size, min_payload))
             end
           end
           //-------------------------------------
@@ -756,8 +776,8 @@ class eth_mon extends uvm_monitor;
           else begin
             if(payload_size != actual_payload_size) begin
               len_mismatch = 1;
-              `uvm_info("UVM_ERROR::MON_LEN_MISMATCH", $sformatf( "DA=%h SA=%h claimed=%0d actual=%0d", 
-		      tr.da, tr.sa, payload_size, actual_payload_size),UVM_LOW)
+              `uvm_error("MON_LEN_MISMATCH", $sformatf( "DA=%h SA=%h claimed=%0d actual=%0d", 
+		      tr.da, tr.sa, payload_size, actual_payload_size))
             end
           end
         end
@@ -825,7 +845,6 @@ class eth_mon extends uvm_monitor;
 
     statistics::v_uif[mac_addr].rx_good_pkt_count      = 0;
     statistics::v_uif[mac_addr].rx_bad_pkt_count       = 0;
-    statistics::v_uif[mac_addr].rx_collision_count     = 0;
     statistics::v_uif[mac_addr].rx_unicast_count       = 0;
     statistics::v_uif[mac_addr].rx_multicast_count     = 0;
     statistics::v_uif[mac_addr].rx_broadcast_count     = 0;
@@ -878,7 +897,6 @@ class eth_mon extends uvm_monitor;
    \n---------------- MAC %0d : RX COUNTERS ----------------
    \nRX Good Packets          = %0d
    \nRX Bad Packets           = %0d
-   \nRX Collision             = %0d
    \nRX Unicast               = %0d
    \nRX Multicast             = %0d
    \nRX Broadcast             = %0d
@@ -896,7 +914,7 @@ class eth_mon extends uvm_monitor;
    \nRx Pause XOFF            = %0d
    \nRX control pkt           = %0d 
    \n================================================",
-      mac_addr,mac_no(mac_addr),
+      mac_addr, mac_no(mac_addr),
       statistics::v_uif[mac_addr].tx_good_pkt_count,
       statistics::v_uif[mac_addr].tx_bad_pkt_count,
       statistics::v_uif[mac_addr].tx_collision_count,
@@ -921,7 +939,6 @@ class eth_mon extends uvm_monitor;
       mac_no(mac_addr),
       statistics::v_uif[mac_addr].rx_good_pkt_count,
       statistics::v_uif[mac_addr].rx_bad_pkt_count,
-      statistics::v_uif[mac_addr].rx_collision_count,
       statistics::v_uif[mac_addr].rx_unicast_count,
       statistics::v_uif[mac_addr].rx_multicast_count,
       statistics::v_uif[mac_addr].rx_broadcast_count,

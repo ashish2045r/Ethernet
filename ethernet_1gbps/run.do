@@ -69,13 +69,7 @@ if {$testname == "gmii_eth_normal_frame_test"} {
 
     #set run_opts "+PKT_SIZE=9000"
 
-} elseif {$testname == "gmii_eth_vlan_reserved_vlanid_test"} {
-
-    #set comp_opts "+define+JUMBO_EN"
-
-    #set run_opts "+PKT_SIZE=9000"
-
-} elseif {$testname == "gmii_eth_invalid_dest_addr_test"} {
+}  elseif {$testname == "gmii_eth_invalid_dest_addr_test"} {
 
     #set comp_opts "+define+JUMBO_EN"
 
@@ -117,13 +111,7 @@ if {$testname == "gmii_eth_normal_frame_test"} {
 
     #set run_opts "+PKT_SIZE=9000"
 
-} elseif {$testname == "gmii_eth_vlan_same_vid_different_pcp_test"} {
-
-    #set comp_opts "+define+JUMBO_EN"
-
-    #set run_opts "+PKT_SIZE=9000"
-
-} elseif {$testname == "gmii_eth_pfc_frame_test"} {
+}  elseif {$testname == "gmii_eth_pfc_frame_test"} {
 
     #set comp_opts "+define+JUMBO_EN"
 
@@ -165,6 +153,12 @@ if {$testname == "gmii_eth_normal_frame_test"} {
 
     #set run_opts "+PKT_SIZE=9000"
 
+} elseif {$testname == "gmii_eth_pause_frame_with_upadated_pause_time"} {
+
+    #set comp_opts "+define+JUMBO_EN"
+
+    #set run_opts "+PKT_SIZE=9000"
+
 } elseif {$testname == "gmii_eth_multicast_frame_test"} {
 
     #set comp_opts "+define+JUMBO_EN"
@@ -189,7 +183,6 @@ set valid_tests {
     gmii_eth_runt_good_fcs_test
     gmii_eth_runt_bad_fcs_test
     gmii_eth_bad_fcs_test
-    gmii_eth_vlan_reserved_vlanid_test
     gmii_eth_invalid_dest_addr_test
     gmii_eth_normal_frame_undefined_length_test
     gmii_eth_collision_detect_test
@@ -205,6 +198,7 @@ set valid_tests {
     gmii_eth_pause_frame_basic_xon_xoff_test
     gmii_eth_simultaneous_pause_frame_test
     gmii_eth_pause_reserved_opcode_test
+    gmii_eth_pause_frame_with_upadated_pause_time
     gmii_eth_multicast_frame_test
 }
 # ==========================================
@@ -272,18 +266,13 @@ $comp_opts
 file mkdir sim/$testname
 set logfile "./sim/$testname/${testname}.log"
 set wavefile "./sim/$testname/${testname}.wlf"
+set qwavefile "./sim/$testname/qwave.db"
 
 # ==========================================
 # Simulation
 # ==========================================
 
-eval vsim work.eth_top \
-+UVM_TESTNAME=$testname \
-+UVM_VERBOSITY=UVM_LOW \
-$run_opts \
--l $logfile \
--wlf $wavefile
-
+eval vsim -debugDB -voptargs=+acc work.eth_top +UVM_TESTNAME=$testname +UVM_VERBOSITY=UVM_LOW $run_opts -l $logfile -qwavedb=+wavefile=$qwavefile
 # ==========================================
 # Logging
 # ==========================================

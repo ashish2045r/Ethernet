@@ -49,11 +49,15 @@ class eth_env extends uvm_env;
       agnt_mac[i].mon_h.mac_addr = seq_item_h.mac_addr[i];
       foreach(seq_item_h.multi_mac_addr[i][j])
 	agnt_mac[i].mon_h.multi_mac_addr[j] = 1;
-    end
-    
-    foreach(agnt_mac[i]) begin
-      agnt_mac[i].drv_h.mac_id = i;
-      agnt_mac[i].mon_h.mac_id = i;
+      statistics::pause_flag[seq_item_h.mac_addr[i]]   = 0;
+      statistics::pause_value[seq_item_h.mac_addr[i]]  = 0;
+      statistics::pause_update[seq_item_h.mac_addr[i]] = 0;
+ 
+      for(int j=0;j<8;j++) begin
+        statistics::pfc_flag [seq_item_h.mac_addr[i]][j] = 0;
+        statistics::pfc_value[seq_item_h.mac_addr[i]][j] = 0;
+        statistics::pfc_update[seq_item_h.mac_addr[i]][j] = 0;
+      end
     end
 
   endfunction  

@@ -18,7 +18,6 @@ class eth_drv extends uvm_driver#(eth_seq_item);
   int rand_slot;
   int backoff_time;     
   int pad_cnt;
-  int mac_id;
   bit frame_in_progress = 0;
   int PAUSE_QUANTA_CYCLES;
  
@@ -44,10 +43,10 @@ class eth_drv extends uvm_driver#(eth_seq_item);
    
     fork
       pause_timer();
-      //pfc_timer();
+      pfc_timer();
     join_none       
     forever begin    
-      wait(statistics::pause_flag[this.mac_id]==0);
+      wait(statistics::pause_flag[mac_addr]==0);
       seq_item_port.get_next_item(tr);
       frame_pack(tr);
       retry_q = frame_q;
@@ -64,22 +63,23 @@ class eth_drv extends uvm_driver#(eth_seq_item);
     int prev_pause_value;
 
     forever begin
-      wait(statistics::pause_flag[mac_id] == 1);
+      wait(statistics::pause_flag[mac_addr] == 1);
+      @(posedge v_intf.TX_CLK);
       wait(frame_in_progress == 0);
-      prev_pause_value = statistics::pause_value[mac_id];
+      prev_pause_value = statistics::pause_value[mac_addr];
       local_pause_cycles = prev_pause_value * PAUSE_QUANTA_CYCLES;
       `uvm_info("PAUSE_DBG", $sformatf("*********************mac=%0d remaining=%0d pause_value=%0d update=%0b",
-               mac_id, local_pause_cycles, statistics::pause_value[mac_id], statistics::pause_update[mac_id]), UVM_LOW)
+               mac_addr[7:0], local_pause_cycles, statistics::pause_value[mac_addr], statistics::pause_update[mac_addr]), UVM_LOW)
 
-      while(local_pause_cycles > 0) begin
+      while(local_pause_cycles > 0 ) begin
         @(posedge v_intf.TX_CLK);
         v_intf.TX_EN <= 0;
         v_intf.TXD   <= 0;
         v_intf.TX_ER <= 0;
-        if(statistics::pause_update[mac_id]) begin
-          prev_pause_value = statistics::pause_value[mac_id];
+        if(statistics::pause_update[mac_addr]) begin
+          prev_pause_value = statistics::pause_value[mac_addr];
           local_pause_cycles = prev_pause_value * PAUSE_QUANTA_CYCLES;
-          statistics::pause_update[mac_id] =0;
+          statistics::pause_update[mac_addr] =0;
           `uvm_info("PAUSE_UPDATE", $sformatf("Pause updated new=%0d",local_pause_cycles), UVM_LOW)
         end
         else begin
@@ -87,8 +87,8 @@ class eth_drv extends uvm_driver#(eth_seq_item);
         end
       end
 
-      statistics::pause_flag[mac_id] = 0;
-      `uvm_info("PAUSE", $sformatf("TX Resume mac_id=%0d",mac_id), UVM_LOW)
+      statistics::pause_flag[mac_addr] = 0;
+      `uvm_info("PAUSE", $sformatf("TX Resume mac_id=%0d",mac_addr[7:0]), UVM_LOW)
     end
   endtask
   
@@ -99,23 +99,31 @@ class eth_drv extends uvm_driver#(eth_seq_item);
     int local_pfc_cycles[8];
     int prev_pfc_value[8];
     forever begin
-      @(posedge v_intf.TX_CLK);
       for(int i=0; i<8; i++) begin
-        if(statistics::pfc_flag[mac_id][i]) begin
-          if(prev_pfc_value[i] != statistics::pfc_value[mac_id][i]) begin
-            prev_pfc_value[i] = statistics::pfc_value[mac_id][i];
-            local_pfc_cycles[i] = prev_pfc_value[i] * PAUSE_QUANTA_CYCLES;
+        if(statistics::pfc_flag[mac_addr][i] && local_pfc_cycles[i]==0) begin
+	  prev_pfc_value[i] = statistics::pfc_value[mac_addr][i];
+          local_pfc_cycles[i] = prev_pfc_value[i] * PAUSE_QUANTA_CYCLES;
             `uvm_info("PFC_UPDATE", $sformatf("Priority=%0d pause_value=%0d pause_cycles=%0d", 
                       i, prev_pfc_value[i], local_pfc_cycles[i]), UVM_LOW)
-          end
         end
-        // TIMER RUNNING
+      end
+
+      @(posedge v_intf.TX_CLK);
+      // TIMER RUNNING
+      for(int i=0;i<8;i++) begin
         if(local_pfc_cycles[i] > 0) begin
-          local_pfc_cycles[i]--;
-          if(local_pfc_cycles[i] == 0) begin
-            statistics::pfc_flag[mac_id][i] = 0;
-            prev_pfc_value[i] = 0;
-            `uvm_info("PFC_RESUME", $sformatf("Priority=%0d resumed", i), UVM_LOW)
+            if(statistics::pfc_update[mac_addr][i])begin
+	      prev_pfc_value[i]=statistics::pfc_value[mac_addr][i];
+	      local_pfc_cycles[i] = prev_pfc_value[i] * PAUSE_QUANTA_CYCLES;
+	      statistics::pfc_update[mac_addr][i]=0;
+            end 
+            if(frame_in_progress==0)
+              local_pfc_cycles[i]--;
+ 
+	    if(local_pfc_cycles[i] == 0) begin
+	      statistics::pfc_flag[mac_addr][i] = 0;
+	      prev_pfc_value[i] = 0;
+	      `uvm_info("PFC_RESUME", $sformatf("Priority=%0d resumed", i), UVM_LOW)
            end
         end
       end
@@ -134,7 +142,6 @@ class eth_drv extends uvm_driver#(eth_seq_item);
   endtask
     
   task carrier_ext();
-    $display("Moding =  %b",tr.mode);
     if(tr.mode == 0 && tr.carr_ext_en == 1) begin
       for(int i = idx; i < 512; i++) begin
         @(posedge v_intf.TX_CLK);         
@@ -146,25 +153,28 @@ class eth_drv extends uvm_driver#(eth_seq_item);
   endtask
   
   task pfc_check(eth_seq_item tr);
-    if(tr.vlan_en && !tr.pfc_frame_en && !tr.pause_frame_en) begin
-      if(statistics::pfc_flag[mac_id][tr.PCP] && statistics::pfc_value[mac_id][tr.PCP] > 0) begin
+    if(tr.vlan_en) begin
+      while(statistics::pfc_flag[mac_addr][tr.PCP]) begin
         `uvm_info("PFC_BLOCK", $sformatf("Blocking priority %0d transmission", tr.PCP), UVM_LOW)
-         wait(statistics::pfc_flag[mac_id][tr.PCP] == 0);
-        end
+         @(posedge v_intf.TX_CLK);
+       end
      end
   endtask    
     
   task drive_tx_frame(eth_seq_item tr);
     pfc_check(tr);
-    frame_in_progress=1;     
+    frame_in_progress=1;
     for (int j = 0; j < idx; j++) begin
       @(posedge v_intf.TX_CLK); 
       if(v_intf.COL == 1) begin
         frame_q.delete();
         collision_detect = 1;
         break;
-      end else
-	      collision_detect = 0;        
+      end
+      else
+	collision_detect = 0;
+      if(j==0)
+	pfc_check(tr);	
 
       v_intf.TX_EN <= 1;      
       v_intf.TXD   <= frame_q.pop_front();
@@ -223,7 +233,6 @@ class eth_drv extends uvm_driver#(eth_seq_item);
       backoff_k      = 0; 
       rand_slot      = 0;  
       backoff_time   = 0;   	    
-      $display("Retry limit exceeded. Abort transmission.");
       return;
     end
 
@@ -254,6 +263,8 @@ class eth_drv extends uvm_driver#(eth_seq_item);
 
     // Wait for backoff time
     #(backoff_time);
+    if(!rand_slot)
+      #(tr.ipg_cnt*8);
     frame_q = retry_q;
     drive_tx_frame(tr);
    

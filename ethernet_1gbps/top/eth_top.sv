@@ -87,7 +87,6 @@ module eth_top;
   for(i=0; i<`NO_OF_AGENTS; i++) begin
     initial begin
       statistics::v_uif[mac_uni[i]] = ui_inf[i];
-      $display("top display for mac: %h",mac_uni[i]);
     end
   end
   endgenerate
@@ -173,7 +172,6 @@ module eth_top;
 
           routing[i] = 1;
           route_byte_count[i] = 0;
-	  $display("route_da = %p",route_da[i]);
           
         end
 
@@ -277,7 +275,6 @@ module eth_top;
             col[i] = 1;
             rx_er_hd[i] = 0;
             crs[i] = 1;
-            $display("Collison");
           end
         end
         

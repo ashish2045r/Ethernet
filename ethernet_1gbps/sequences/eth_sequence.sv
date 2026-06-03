@@ -14,21 +14,15 @@ class base_seq extends uvm_sequence #(eth_seq_item);
   bit [15:0] pause_opc;
   bit [15:0] pause_time; 
   bit corrupt_preamble_en;
-  int count1;
   bit corrupt_fcs_en;
   static int trans_count;
-  int count2;
   bit custom_da;
   bit [11:0] VID;
   bit invld_length_en;
   bit carr_ext_en;
-  bit set_error;
   bit runt_en;
-  bit send_corpt_preamble;
   bit send_runt;
-  bit send_corpt_fcs;
   bit len_payload_mismat_en; 
-  bit send_len_mismatch;
   bit corrupt_ipg_en;
   int pkt_no;
   int error_pkt_no;
@@ -80,14 +74,8 @@ class gmii_eth_normal_frame_seq extends base_seq;
       req.padding_en = 1;
     
     //Runt Frame
-    if(this.runt_en == 1) begin
-      send_runt = $random;
-      
-      if(send_runt == 1)
-        c_ether_type = $urandom_range(0,45);
-      else
-        c_ether_type = $urandom_range(46,1500);
-      end
+    if(this.runt_en == 1) 
+      c_ether_type = $urandom_range(0,45);
         
     
       if(payload_rand_en == 1) 
@@ -126,7 +114,7 @@ class gmii_eth_normal_frame_seq extends base_seq;
       end */
       
 
-      if(this.err_b == 1 && exact_pkt == error_pkt_no) begin
+      if(this.err_b == 1) begin
         req.err_b      = 1;
         req.err_offset = this.err_offset;
        `uvm_info("SEQ_ERR_PKT",$sformatf("Injecting error in packet no = %0d", exact_pkt),UVM_LOW)
@@ -152,10 +140,12 @@ class gmii_eth_normal_frame_seq extends base_seq;
       //--------------------pause_frame--------
 
       if(pause_sel) begin
-  	    req.pause_frame_en = 1;
+  	req.pause_frame_en = 1;
         req.pause_opc      = 16'h0001;
         req.ether_type     = 16'h8808;
         req.pause_time     = this.pause_time;
+	if($urandom_range(0,1))
+	  req.da             = 48'h0180c2000001;
         
         if(this.pause_rsd_en) 
           req.pause_opc      = 16'h0002;
@@ -168,7 +158,8 @@ class gmii_eth_normal_frame_seq extends base_seq;
       
         req.pfc_frame_en=1;
         req.pause_opc =16'h0101;
-       // req.da = 48'h01_80_c2_00_00_01;
+	if($urandom_range(0,1))
+	  req.da             = 48'h0180c2000001;
         req.vlan_en      = 0;
         req.ether_type =16'h8808;
         req.priority_en_vector[3] = 1;// priority[3] 
@@ -181,7 +172,7 @@ class gmii_eth_normal_frame_seq extends base_seq;
   
     
       //length and payload mismatch
-      if(len_payload_mismat_en == 1 && error_pkt_no == exact_pkt) begin
+      if(len_payload_mismat_en == 1) begin
         req.ether_type = $urandom_range(46,1500);
         `uvm_info("LEN_MISMATCH",
                   $sformatf("Sending wrong Length in Transaction=%d",exact_pkt),UVM_LOW)
@@ -190,23 +181,24 @@ class gmii_eth_normal_frame_seq extends base_seq;
       
       
       //CORRUPTED PREAMBLE
-      if(this.corrupt_preamble_en == 1 && pkt_no == exact_pkt) begin
+      if(this.corrupt_preamble_en == 1) begin
           req.preamble[3] = 8'hFF;
           `uvm_info("PREAMBLE CORRUPT", $sformatf("Sending Corrupted Preamble Packet, Transaction no = %0d",exact_pkt),UVM_LOW)
       end
       
    
       //CORRUPT FCS
-      if(this.corrupt_fcs_en == 1 && (error_pkt_no == exact_pkt || send_runt == 1 || req.ether_type > 1518)) begin
+      if(this.corrupt_fcs_en == 1) begin
           req.corrupt_fcs_en = 1;
           `uvm_info("CORRUPT FCS TX",$sformatf("Sending bad fcs in Transaction = %0d",exact_pkt),UVM_LOW)
       end else
         req.corrupt_fcs_en = 0;
       
       //CORRUPT IPG
-      if(this.corrupt_ipg_en == 1 && error_pkt_no == exact_pkt) begin        
+      if(this.corrupt_ipg_en == 1) begin        
       req.ipg_cnt = 7;
-          `uvm_info("CORRUPT IPG",$sformatf("Sending Corrupted IPG Frame after Transaction no = %0d, IPG Count = %0d",exact_pkt,req.ipg_cnt),UVM_LOW)
+          `uvm_info("CORRUPT IPG",$sformatf("Sending Corrupted IPG Frame after Transaction no = %0d, IPG Count = %0d",
+	    exact_pkt,req.ipg_cnt),UVM_LOW)
       end else
         req.ipg_cnt = 12;
       

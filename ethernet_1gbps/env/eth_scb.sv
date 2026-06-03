@@ -65,6 +65,24 @@ class eth_scb extends uvm_scoreboard;
       return;
     end
 
+    if(is_multicast_addr(tx_tr)) begin
+
+      foreach(ai_2[i]) begin
+
+	if(i==src_id)
+	  continue;
+
+	if(tx_tr.multi_mac_addr[i].exists(tx_tr.da)) begin
+	  tx_aa[src_id][i][txn_no] = tx_tr;
+	  `uvm_info("SCB_MULTICAST_TX", $sformatf( "Stored MULTICAST TX : TX_AGENT[%0d] --> RX_AGENT[%0d] | TX_NO=%0d",
+	    src_id, i, txn_no), UVM_LOW)
+	end
+
+      end
+
+      return;
+    end
+
 
     dst_id = destination_address(tx_tr);
 
@@ -112,6 +130,14 @@ class eth_scb extends uvm_scoreboard;
     return (da == 48'hFFFF_FFFF_FFFF);
   endfunction
 
+  function bit is_multicast_addr(eth_seq_item tr);
+    foreach(tr.multi_mac_addr[i]) begin
+      if(tr.multi_mac_addr[i].exists(tr.da))
+	return 1;
+    end
+    return 0;
+  endfunction
+
   function void write_ap_2(eth_seq_item rx_tr);
     int src_id;
     int dst_id;
@@ -144,6 +170,17 @@ class eth_scb extends uvm_scoreboard;
 
     end
 
+    else if(is_multicast_addr(rx_tr)) begin
+
+      dst_id = multi_cast(rx_tr);
+
+      if(dst_id == -1) begin
+        `uvm_error("SCB_BC_FAIL", "Multicast decode failed")
+        return;
+      end
+
+    end
+
     //-----------------------------------------
     // UNICAST CASE
     //-----------------------------------------
@@ -165,7 +202,8 @@ class eth_scb extends uvm_scoreboard;
      !tx_aa[src_id].exists(dst_id) ||
      !tx_aa[src_id][dst_id].exists(txn_no)) begin
     
-      `uvm_error("SCB_EXTRA_RX", $sformatf( "RX received but matching TX not found : TX_AGENT[%0d] --> RX_AGENT[%0d] | TX_NO=%0d", src_id, dst_id			, txn_no))
+      `uvm_error("SCB_EXTRA_RX", $sformatf( "RX received but matching TX not found : TX_AGENT[%0d] --> RX_AGENT[%0d] | TX_NO=%0d", 
+	src_id, dst_id, txn_no))
       return;
 
     end
@@ -573,6 +611,13 @@ class eth_scb extends uvm_scoreboard;
   function int broad_cast(eth_seq_item rx_tr);
     for(int i = 0; i < `NO_OF_AGENTS; i++) begin
       if(rx_tr.agt_addr == rx_tr.mac_addr[i])
+	return i;
+    end
+  endfunction
+
+  function int multi_cast(eth_seq_item rx_tr);
+    for(int i=0; i<`NO_OF_AGENTS; i++) begin
+      if(rx_tr.mac_addr[i]==rx_tr.agt_addr && rx_tr.multi_mac_addr[i].exists(rx_tr.da))
 	return i;
     end
   endfunction
