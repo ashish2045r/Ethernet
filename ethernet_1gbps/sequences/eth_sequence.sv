@@ -65,11 +65,6 @@ class gmii_eth_normal_frame_seq extends base_seq;
       c_ether_type = $urandom_range(1500, 1536);
       
       
-    if(this.carr_ext_en == 1) begin
-      c_ether_type = $urandom_range(46,486);
-      req.carr_ext_en = carr_ext_en;
-    end      
-      
     if(this.padding_en == 1)
       req.padding_en = 1;
     
@@ -97,6 +92,7 @@ class gmii_eth_normal_frame_seq extends base_seq;
       //end      
 
       req.mode = mode;
+      req.carr_ext_en = carr_ext_en;
       
       if(custom_da)
         req.da=da;   

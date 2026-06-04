@@ -142,13 +142,15 @@ class eth_drv extends uvm_driver#(eth_seq_item);
   endtask
     
   task carrier_ext();
-    if(tr.mode == 0 && tr.carr_ext_en == 1) begin
+    if(tr.mode == 0 && tr.carr_ext_en == 1 && idx < 512) begin
       for(int i = idx; i < 512; i++) begin
         @(posedge v_intf.TX_CLK);         
         v_intf.TX_EN <= 0;      
         v_intf.TXD   <= 8'h0F;
-        v_intf.TX_ER <= 1;            
-      end     
+        v_intf.TX_ER <= 1;
+	idx++;	
+      end
+      `uvm_info("CARR_EXT",$sformatf("Sending Carrer Extension for %0d bytes",idx),UVM_LOW);
     end    
   endtask
   
@@ -197,7 +199,7 @@ class eth_drv extends uvm_driver#(eth_seq_item);
     end
 
     //Adding Carrier Extension if it is less than 512 bytes
-    carrier_ext();
+    if(!tr.mode) carrier_ext();
     
     //Driving IPG
     for(int j = 0;j < tr.ipg_cnt; j++) begin  //8 bits wide * 12 clock = 96-bit times

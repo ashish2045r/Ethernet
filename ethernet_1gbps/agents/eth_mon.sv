@@ -471,18 +471,14 @@ class eth_mon extends uvm_monitor;
       //------------------------------------------------
       da_match = 0;
 
-      foreach(tr.mac_addr[i]) begin
-	       if(rx_da == tr.mac_addr[i]) begin
-	         da_match = 1;
-	         break;
-	       end
-      end  
+      if(rx_da == mac_addr)
+	da_match = 1;
 
       if(rx_da == 48'hFF_FF_FF_FF_FF_FF)
-	       da_match = 1;
+	da_match = 1;
 
       if(multi_mac_addr.exists(rx_da))
-	       da_match = 1;
+	da_match = 1;
 
       //------------------------------------------------
       // COLLISION
@@ -875,44 +871,9 @@ class eth_mon extends uvm_monitor;
   function void report_phase(uvm_phase phase);
     `uvm_info("COUNTER_REPORT", $sformatf("\n================ COUNTER SUMMARY =================\nMAC_ADDR=%h
    \n---------------- MAC %0d : TX COUNTERS ----------------
-   \nTX Good Packets          = %0d
-   \nTX Bad Packets           = %0d
-   \nTX Collision             = %0d
-   \nTX Unicast               = %0d
-   \nTX Multicast             = %0d
-   \nTX Broadcast             = %0d
-   \nTX Runt                  = %0d
-   \nTX Fragment              = %0d
-   \nTX Jumbo                 = %0d
-   \nTX Super Jumbo           = %0d
-   \nTX Jabber                = %0d
-   \nTX Pause                 = %0d
-   \nTX VLAN                  = %0d
-   \nTX IPG Violation         = %0d
-   \nTX PFC                   = %0d
-   \nTX_carrier_ext_cnt       = %0d
-   \nTX Pause XON             = %0d
-   \nTx Pause XOFF            = %0d
-   \nTX control pkt           = %0d
-   \n---------------- MAC %0d : RX COUNTERS ----------------
-   \nRX Good Packets          = %0d
-   \nRX Bad Packets           = %0d
-   \nRX Unicast               = %0d
-   \nRX Multicast             = %0d
-   \nRX Broadcast             = %0d
-   \nRX Runt                  = %0d
-   \nRX Fragment              = %0d
-   \nRX Jumbo                 = %0d
-   \nRX Super Jumbo           = %0d
-   \nRX Jabber                = %0d
-   \nRX Pause                 = %0d
-   \nRX VLAN                  = %0d
-   \nRX PFC                   = %0d
-   \nRX IPG Violation         = %0d
-   \nRX_carrier_ext_cnt       = %0d
-   \nRX Pause XON             = %0d
-   \nRx Pause XOFF            = %0d
-   \nRX control pkt           = %0d 
+   \n TX Good Packets          = %0d\n TX Bad Packets           = %0d\n TX Collision             = %0d\n TX Unicast               = %0d\n TX Multicast             = %0d\n TX Broadcast             = %0d\n TX Runt                  = %0d\n TX Fragment              = %0d\n TX Jumbo                 = %0d\n TX Super Jumbo           = %0d\n TX Jabber                = %0d\n TX Pause                 = %0d\n TX VLAN                  = %0d\n TX IPG Violation         = %0d\n TX PFC                   = %0d\n TX_carrier_ext_cnt       = %0d\n TX Pause XON             = %0d\n Tx Pause XOFF            = %0d\n TX control pkt           = %0d
+   ---------------- MAC %0d : RX COUNTERS ----------------
+   \n RX Good Packets          = %0d\n RX Bad Packets           = %0d\n RX Unicast               = %0d\n RX Multicast             = %0d\n RX Broadcast             = %0d\n RX Runt                  = %0d\n RX Fragment              = %0d\n RX Jumbo                 = %0d\n RX Super Jumbo           = %0d\n RX Jabber                = %0d\n RX Pause                 = %0d\n RX VLAN                  = %0d\n RX PFC                   = %0d\n RX IPG Violation         = %0d\n RX_carrier_ext_cnt       = %0d\n RX Pause XON             = %0d\n Rx Pause XOFF            = %0d\n RX control pkt           = %0d\n 
    \n================================================",
       mac_addr, mac_no(mac_addr),
       statistics::v_uif[mac_addr].tx_good_pkt_count,
