@@ -82,10 +82,17 @@ class virtual_seq extends base_virtual_seq;
       end
       // Start two sequences in parallel
       else begin
-        fork
-          seq1.start(p_sequencer.mac_seqr_h[0]);
-          seq2.start(p_sequencer.mac_seqr_h[1]);
-        join
+	if(this.middle_coll_en == 1) begin
+	  fork
+	    seq1.start(p_sequencer.mac_seqr_h[0]);
+	    #160 seq2.start(p_sequencer.mac_seqr_h[1]);
+	  join        
+	end else begin    
+	  fork
+	    seq1.start(p_sequencer.mac_seqr_h[0]);
+	    seq2.start(p_sequencer.mac_seqr_h[1]);
+	  join
+	end
       end
     end
 
@@ -226,7 +233,8 @@ class virtual_seq extends base_virtual_seq;
     seq.corrupt_ipg_en      = this.corrupt_ipg_en;
     seq.error_pkt_no        = this.error_pkt_no;
     seq.padding_en          = this.padding_en;
-    seq.pause_rsd_en       = this.pause_rsd_en ; 
+    seq.pause_rsd_en        = this.pause_rsd_en;
+
   endtask   
 
 endclass
